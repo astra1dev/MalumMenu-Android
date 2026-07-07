@@ -1,0 +1,59 @@
+{
+    "name": "malummenu-android",
+    "description": "Android Among Us cheat using FRIDA and frida-il2cpp-bridge",
+    "author": "astra1dev",
+    "keywords": [
+        "frida",
+        "il2cpp",
+        "unity",
+        "amongus",
+        "modmenu"
+    ],
+    "homepage": "https://github.com/astra1dev/MalumMenu-Android#readme",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/astra1dev/MalumMenu-Android.git"
+    },
+    "bugs": {
+        "url": "https://github.com/astra1dev/MalumMenu-Android/issues"
+    },
+    "license": "GPL-3.0",
+    "main": "src/index.ts",
+    "scripts": {
+        "prepare": "npm run build:release",
+        "build:release": "frida-compile src/index.ts --output dist/agent.js --compress --verbose",
+        "build:dev": "frida-compile src/index.ts --output dist/agent.js --verbose",
+        "watch": "frida-compile src/index.ts --output dist/agent.js --verbose --watch",
+        "spawn": "frida -U gadget -l dist/agent.js",
+        "spawn:server": "frida -U \"Among Us\" -l dist/agent.js",
+        "lint": "eslint \"src/**\"",
+        "prettier": "prettier --write \"src/**\""
+    },
+    "devDependencies": {
+        "@eslint/js": "^10.0.1",
+        "@types/frida-gum": "^19.7.0",
+        "@types/node": "^26.0.1",
+        "@typescript-eslint/eslint-plugin": "^8.47.0",
+        "@typescript-eslint/parser": "^8.47.0",
+        "eslint": "^10.6.0",
+        "eslint-config-prettier": "^10.1.8",
+        "frida-compile": "^19.0.5",
+        "globals": "^17.7.0",
+        "jiti": "^2.6.1",
+        "prettier": "^3.9.3",
+        "typescript": "^5.6.3",
+        "typescript-eslint": "^8.47.0"
+    },
+    "dependencies": {
+        "buffer": "^6.0.3",
+        "frida-il2cpp-bridge": "^0.13.1",
+        "frida-java-bridge": "^7.0.13",
+        "frida-java-menu": "github:astra1dev/frida-java-menu"
+    },
+    "prettier": {
+        "tabWidth": 4,
+        "arrowParens": "avoid",
+        "trailingComma": "none",
+        "printWidth": 160
+    }
+}

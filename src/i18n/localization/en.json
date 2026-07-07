@@ -1,0 +1,53 @@
+{
+    "languages": {
+        "en": "English",
+        "de": "German"
+    },
+    "menu": {
+        "info": {
+            "title": "MalumMenu",
+            "desc": "v{0} ({1}) — Created by Astral"
+        },
+        "tabs": {
+            "debug": "<b>——— Debug ———</b>",
+            "movement": "<b>——— Movement ———</b>",
+            "esp": "<b>——— ESP ———</b>",
+            "ship": "<b>——— Ship ———</b>",
+            "passive": "<b>——— Passive ———</b>",
+            "other": "<b>——— Other ———</b>"
+        },
+        "functions": {
+            "go_to_main_menu": "Go to Main Menu",
+            "noclip": "NoClip",
+            "sabotage_reactor": "Sabotage Reactor",
+            "open_sabotage_map": "Open Sabotage Map",
+            "call_meeting": "Call Meeting",
+            "no_shadows": "No Shadows",
+            "unlock_vents": "Unlock Vents",
+            "walk_in_vents": "Walk In Vents",
+            "kick_vents": "Kick All From Vents",
+
+            "custom_speed": "Use Custom Speed",
+            "speed_val": "Custom Speed: {0} / 20",
+
+            "disable_analytics": "Disable Analytics",
+            "uwuify": "UwU?",
+            "select_platform": "Select Platform"
+        },
+        "other": {
+            "language": "Select Language",
+            "github_url": "GitHub Repository (Leave a star!)",
+            "discord_url": "Discord Server",
+            "malummenu_url": "Check Out MalumMenu for PC!",
+            "changelog": "Open Changelog"
+        },
+        "toasts": {
+            "no_overlay_permission": "Overlay permission is needed to show the menu",
+            "hide_button": "Hide",
+            "close_button": "Close",
+            "hide_callback": "Icon hidden",
+            "kill_callback": "Menu killed",
+            "on_locale_changed": "Changed mod menu language to {0}, restart game to apply"
+        }
+    }
+}
