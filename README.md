@@ -151,16 +151,16 @@ You should also periodically ensure code quality:
 
 ### Script Mode
 
-- Inject script into APK: `objection patchapk -c objection.cfg.json -s data/build.apk -l dist/agent.js -a arm64-v8a -V 17.15.3`
-- Connect your device via ADB and run `adb install -i com.android.vending build.patched.apk` to install the APK on your device. (You can also manually copy the APK to your device and install it, but this is the fastest way)
+- Inject script into APK: `objection patchapk -c objection.cfg.json -s data/build.apk -l dist/agent.js -a arm64-v8a -V 17.15.4`
+- Connect your device via ADB and run `adb install -i com.android.vending data/build.objection.apk` to install the APK on your device. (You can also manually copy the APK to your device and install it, but this is the fastest way)
 - Start the game. The first time you start it, it will ask for "Display over other apps" permission. You should now see the mod icon in the top left corner.
 
 ### Listen Mode
 
 If you are modifying the code, use this mode to avoid rebuilding the APK constantly.
 
-- Inject Frida into APK: `objection patchapk -s data/build.apk -a arm64-v8a -V 17.15.3`
-- Connect your device via ADB and run `adb install -i com.android.vending build.patched.apk` to install the APK on your device. (You can also manually copy the APK to your device and install it, but this is the fastest way)
+- Inject Frida into APK: `objection patchapk -s data/build.apk -a arm64-v8a -V 17.15.4`
+- Connect your device via ADB and run `adb install -i com.android.vending data/build.objection.apk` to install the APK on your device. (You can also manually copy the APK to your device and install it, but this is the fastest way)
 - Start the game. The first time you start it, it will ask for "Display over other apps" permission. 
 - Every time you start the game, it will immediately pause and wait until you manually inject the script. (If you check `adb logcat`, something similar to `Frida: Listening on TCP port 27042` should be shown)
 - `npm run spawn` - spawn script in gadget mode

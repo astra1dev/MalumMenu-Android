@@ -111,9 +111,9 @@ In script mode, this wouldn't be needed anyway as the script works fully standal
 If you want to verify that the gadget was embedded, tell objection to wait before rebuilding the apk using the `--pause` flag, and navigate to the temporary directory where objection stores the apk its currently working on.
 Inside the `lib/arm64-v8a` directory you should see 3 files:
 
-- `libfrida-gadget-17.15.3-android-arm64.config.so` - this is the configuration file Frida uses. This is not actually a shared library, but a simple JSON file (you can open it in a normal text editor)
-- `libfrida-gadget-17.15.3-android-arm64.script.so` - the actual script Frida will load based on the configuration file. This is also not actually a shared object, but the compiled JavaScript file (dist/agent.js)
-- `libfrida-gadget-17.15.3-android-arm64.so` - frida-gadget itself, which will do all the heavy lifting (should be around 25MB big). This is an actual valid shared object file
+- `libfrida-gadget-17.15.4-android-arm64.config.so` - this is the configuration file Frida uses. This is not actually a shared library, but a simple JSON file (you can open it in a normal text editor)
+- `libfrida-gadget-17.15.4-android-arm64.script.so` - the actual script Frida will load based on the configuration file. This is also not actually a shared object, but the compiled JavaScript file (dist/agent.js)
+- `libfrida-gadget-17.15.4-android-arm64.so` - frida-gadget itself, which will do all the heavy lifting (should be around 25MB big). This is an actual valid shared object file
 
 The files are named like this because they must start with `lib` and end with `.so`, otherwise the Android package manager won't copy them.
 
@@ -122,7 +122,7 @@ You can also inspect the MainActivity (for Among Us it's `smali_classes5/com/inn
 ```
 .method protected onCreate(Landroid/os/Bundle;)V
     .locals 1
-    const-string v0, "frida-gadget-17.15.3-android-arm64"
+    const-string v0, "frida-gadget-17.15.4-android-arm64"
     invoke-static {v0}, Ljava/lang/System;->loadLibrary(Ljava/lang/String;)V
 ```
 
