@@ -101,19 +101,10 @@ export class ShipModule extends BaseModule {
             return;
         }
 
-        /*
-        public static void OpenSabotageMapCheat()
-        {
-            if (!CheatToggles.sabotageMap) return;
-
-            DestroyableSingleton<HudManager>.Instance.ToggleMapVisible(new MapOptions
-            {
-                Mode = MapOptions.Modes.Sabotage
-            });
-
-            CheatToggles.sabotageMap = false;
-        }
-        */
+        // DestroyableSingleton<HudManager>.Instance.ToggleMapVisible(new MapOptions
+        // {
+        //     Mode = MapOptions.Modes.Sabotage
+        // });
 
         //const options = module.MapOptions;
         const opt = UnityUtils.createInstance(module.MapOptions) as Il2Cpp.Object;

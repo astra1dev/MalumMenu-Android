@@ -21,14 +21,10 @@ class MalumMenu {
             Logger.debug("IL2CPP Loaded");
             Logger.infoGreen(`MalumMenu ${Constants.VERSION}, Game Version: ${Il2Cpp.application.version!}`);
             I18n.init();
-
-            // Init Unity related
             AssemblyHelper.init();
             UnityLogger.init();
             UnityUtils.init();
             ModuleManager.initAll();
-
-            // Init UI
             MenuUI.init();
         }).catch(error => Logger.error(`Failed to initialize script: ${error}`));
     }

@@ -32,10 +32,9 @@ export class DebugTab{
             layout.button(
                 "Exit game",
                 () => {
-                    toast("Hold for exit", 0);
+                    toast(I18n.t("menu.toasts.exit_game"), 0);
                 },
                 () => {
-                    // Long Callback
                     JavaUtils.exitFromApp();
                 }
             )

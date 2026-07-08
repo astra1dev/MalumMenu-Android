@@ -178,6 +178,7 @@ See [CONTRIBUTING.md](docs/CONTRIBUTING.md)
 - [frida-java-menu](https://github.com/astra1dev/frida-java-menu) - create custom floating menus on Android
 - [objection](https://github.com/sensepost/objection) - runtime mobile exploration toolkit (used to inject Frida into APKs)
 - [fallguys-frida-modmenu](https://github.com/repinek/fallguys-frida-modmenu) - main inspiration for this project, utils & modules & i18n logic
+- [MalumMenu](https://github.com/scp222thj/MalumMenu) - Among Us cheat menu for PC
 - [gplaydl](https://github.com/rehmatworks/gplaydl) - CLI Google Play Store APK downloader
 
 # ⚠️ Disclaimer

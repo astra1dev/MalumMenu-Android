@@ -44,6 +44,7 @@ export class UnityUtils {
         Logger.info(`[${this.tag}::init] Initialized`);
     }
 
+    /** Wrapper over UnityEngine::SceneManagement::SceneManager::LoadScene */
     static LoadScene(scene: string): void {
         this.SceneManager.method<void>("LoadScene", 1).invoke(Il2Cpp.string(scene));
     }

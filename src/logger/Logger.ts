@@ -49,7 +49,7 @@ export class Logger {
     }
 
     /**
-     * Error log and showing toast for 3.5s
+     * Log error and show toast for 3.5s
      *
      * Behavior:
      * - console: {message} {error.stack}

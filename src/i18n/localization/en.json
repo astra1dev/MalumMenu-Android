@@ -18,19 +18,22 @@
         },
         "functions": {
             "go_to_main_menu": "Go to Main Menu",
-            "noclip": "NoClip",
-            "sabotage_reactor": "Sabotage Reactor",
-            "open_sabotage_map": "Open Sabotage Map",
-            "call_meeting": "Call Meeting",
-            "no_shadows": "No Shadows",
-            "unlock_vents": "Unlock Vents",
-            "walk_in_vents": "Walk In Vents",
-            "kick_vents": "Kick All From Vents",
 
+            "noclip": "NoClip",
             "custom_speed": "Use Custom Speed",
             "speed_val": "Custom Speed: {0} / 20",
 
+            "no_shadows": "No Shadows",
+
+            "call_meeting": "Call Meeting",
+            "sabotage_reactor": "Sabotage Reactor",
+            "open_sabotage_map": "Open Sabotage Map",
+            "unlock_vents": "Unlock Vents",
+            "kick_vents": "Kick All From Vents",
+            "walk_in_vents": "Walk In Vents",
+
             "disable_analytics": "Disable Analytics",
+
             "uwuify": "UwU?",
             "select_platform": "Select Platform"
         },
@@ -47,6 +50,7 @@
             "close_button": "Close",
             "hide_callback": "Icon hidden",
             "kill_callback": "Menu killed",
+            "exit_game": "Long press button to exit game",
             "on_locale_changed": "Changed mod menu language to {0}, restart game to apply"
         }
     }

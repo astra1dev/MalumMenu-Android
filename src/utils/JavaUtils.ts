@@ -48,7 +48,7 @@ export class JavaUtils {
     }
 
     /**
-     * Copies text in system clipboard
+     * Copies text to system clipboard
      *
      * @param text Text to copy
      */
