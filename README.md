@@ -3,7 +3,7 @@
     <img src="https://img.shields.io/badge/license-GPL-yellow.svg?style=plastic&logo=GNU&label=License" alt="GPL">
   </a>
 
-  <a href="https://discord.gg/YYcYf88jAb">
+  <a href="https://discord.gg/ue9x6TnMC3">
     <img src="https://img.shields.io/badge/Join%20Us%20on-Discord-blue?style=flat&logo=discord" alt="Discord">
   </a>
 

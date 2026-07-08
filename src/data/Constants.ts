@@ -5,7 +5,7 @@ export const Constants = {
     GITHUB_URL: "https://github.com/astra1dev/MalumMenu-Android",
     GITHUB_RELEASES_URL: "https://github.com/astra1dev/MalumMenu-Android/releases/latest",
     GITHUB_CHANGELOG_URL: "https://github.com/astra1dev/MalumMenu-Android/blob/main/docs/CHANGELOG.md",
-    DISCORD_URL: "https://discord.gg/YYcYf88jAb",
+    DISCORD_URL: "https://discord.gg/ue9x6TnMC3",
     MALUMMENU_URL: "https://github.com/scp222thj/MalumMenu",
 
     UNITY_LOGGING: false,
