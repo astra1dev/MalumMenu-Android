@@ -55,6 +55,16 @@ You should always review your own pull request first, before marking it as ready
 3. Commit the changes once you are happy with them.
 4. When you're finished with the changes, create a pull request.
 
+# Community translations
+
+JSON translation files are located in the [`src/i18n/localization`](https://github.com/astra1dev/MalumMenu-Android/tree/main/src/i18n/localization) directory.
+If you want to contribute a new translation, create a JSON file with the name of the language (e.g. `fr.json` for French) and add your translations in the same format as the existing files.
+
+If you notice any mistakes or inconsistencies in the existing translations, feel free to open a pull request with your fixes.
+
+> [!WARNING]
+> Please do not use AI or tools like DeepL and Google Translate for translations.
+
 # How this project uses Frida
 
 ## Frida Operation Modes
