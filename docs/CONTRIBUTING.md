@@ -77,14 +77,14 @@ Source: https://frida.re/docs/gadget/
   frida-gadget supports 4 interaction types:
     - listen (default interaction): gadget exposes a frida-server compatible interface, listening on localhost:27042 by default.
       The game will pause at launch, and you can connect to it by connecting your phone via USB to your PC, launching ADB, and launching Frida. 
-      This is what im personally using when I'm developing new features, simply because it's faster: The script can be modified and reloaded on the fly, instead of having to wait for building the APK again
+      I'm using this when developing new features, simply because it's faster: The script can be modified and reloaded on the fly, instead of having to wait for building the APK again
     - connect: gadget will connect to a running frida-portal instead of listening on TCP
     - script: gadget autonomously runs a pre-specified script off the filesystem without any outside communication, immediately on game start
     - scriptDirectory: gadget can select one from multiple different scripts to run based on the program it's loaded in
 
 The interactions can be customized with a configuration file.
 
-Because injected mode requires root, it's not suitable for the common MalumMenu user.
+Because injected mode requires root, it's not suitable for the common MalumMenu-Android user.
 
 ## Embedding frida-gadget
 
@@ -111,28 +111,34 @@ Under the hood, these tools make use of other, more specialized tools, for examp
 - `apktool` or `APKEditor` to extract and rebuild APK files
 - `jarsigner` or `apksigner` for signing the APKs so they can be installed on phones
 
-Before repackaging the APK, the permission to display over other apps also needs to be added by modifying `AndroidManifest.xml` manually so MalumMenu can display itself on top of the game.
+Before repackaging the APK, the permission to display over other apps also needs to be added by modifying `AndroidManifest.xml` manually so MalumMenu-Android can display itself on top of the game.
 
 (If we're using the listen interaction, we also need to add `android.permission.INTERNET` so frida-gadget can expose the interface for the PC to connect to. Among Us already has the INTERNET permission, so we actually don't have to do this.
 In script mode, this wouldn't be needed anyway as the script works fully standalone without connecting to a frida-server)
 
 ## Verifying the embedding process (advanced)
 
-If you want to verify that the gadget was embedded, tell objection to wait before rebuilding the apk using the `--pause` flag, and navigate to the temporary directory where objection stores the apk its currently working on.
+If you want to verify that the gadget was embedded, tell objection to wait before rebuilding the apk using the `--pause` flag, and navigate to the temporary directory objection tells you.
+
+<img src="https://github.com/user-attachments/assets/b99ed20e-0c9b-4b3c-80f4-24d6e38a02b6" alt="objection console output">
+
 Inside the `lib/arm64-v8a` directory you should see 3 files:
 
-- `libfrida-gadget-17.15.4-android-arm64.config.so` - this is the configuration file Frida uses. This is not actually a shared library, but a simple JSON file (you can open it in a normal text editor)
-- `libfrida-gadget-17.15.4-android-arm64.script.so` - the actual script Frida will load based on the configuration file. This is also not actually a shared object, but the compiled JavaScript file (dist/agent.js)
-- `libfrida-gadget-17.15.4-android-arm64.so` - frida-gadget itself, which will do all the heavy lifting (should be around 25MB big). This is an actual valid shared object file
+- `libfrida-gadget.config.so` - the configuration file Frida uses. This is not actually a shared library, but a simple JSON file (you can open it in a normal text editor)
+- `libfrida-gadget.script.so` - the actual script Frida will load based on the configuration file. This is also not actually a shared object, but the compiled JavaScript file (dist/agent.js)
+- `libfrida-gadget.so` - frida-gadget itself, which will do all the heavy lifting (should be around 25MB big). This is a valid shared object file
 
 The files are named like this because they must start with `lib` and end with `.so`, otherwise the Android package manager won't copy them.
 
-You can also inspect the MainActivity (for Among Us it's `smali_classes5/com/innersloth/spacemafia/EosUnityPlayerActivity.smali`) to see the added smali code which will load frida-gadget on game launch:
+You can also inspect the MainActivity (`EosUnityPlayerActivity.smali`) to see the added smali code which will load frida-gadget on game launch:
 
 ```
-.method protected onCreate(Landroid/os/Bundle;)V
-    .locals 1
-    const-string v0, "frida-gadget-17.15.4-android-arm64"
+# direct methods
+.method static constructor <clinit>()V
+    .locals 2
+
+    const-string v0, "frida-gadget"
+
     invoke-static {v0}, Ljava/lang/System;->loadLibrary(Ljava/lang/String;)V
 ```
 
@@ -140,6 +146,8 @@ The loading process goes like this: Injected loadLibrary code in smali → loads
 
 If you are using a patcher that doesn't have the feature to wait before rebuilding, you can verify that frida-gadget was added to the APK by installing the APK on your device and opening the open-source LibChecker app. 
 In the "Native libraries" tab you should see the above 3 files (the script.so and config.so will show "broken ELF", but that's expected since they're not supposed to be ELF files).
+
+<img src="https://github.com/user-attachments/assets/dda3165a-453a-4721-9d39-ed98527dd717" alt="LibChecker showing the 3 frida-gadget files">
 
 ## Additional requirements
 
