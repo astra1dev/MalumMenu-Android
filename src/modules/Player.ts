@@ -8,10 +8,12 @@ export class PlayerModule extends BaseModule {
 
     private PlayerControl!: Il2Cpp.Class;
     private PlayerPhysics!: Il2Cpp.Class;
+    private PlayerPurchasesData!: Il2Cpp.Class;
     private HudManager!: Il2Cpp.Class;
     private Vent!: Il2Cpp.Class;
 
     private PlayerPhysics_LateUpdate!: Il2Cpp.Method;
+    private PlayerPurchasesData_GetPurchase!: Il2Cpp.Method;
     private HudManager_Update!: Il2Cpp.Method;
     private Vent_CanUse!: Il2Cpp.Method;
 
@@ -20,10 +22,12 @@ export class PlayerModule extends BaseModule {
     public init(): void {
         this.PlayerControl = AssemblyHelper.AssemblyCSharp.class("PlayerControl");
         this.PlayerPhysics = AssemblyHelper.AssemblyCSharp.class("PlayerPhysics");
+        this.PlayerPurchasesData = AssemblyHelper.AssemblyCSharp.class("PlayerPurchasesData");
         this.HudManager = AssemblyHelper.AssemblyCSharp.class("HudManager");
         this.Vent = AssemblyHelper.AssemblyCSharp.class("Vent");
 
         this.PlayerPhysics_LateUpdate = this.PlayerPhysics.method<void>("LateUpdate");
+        this.PlayerPurchasesData_GetPurchase = this.PlayerPurchasesData.method<boolean>("GetPurchase");
         this.HudManager_Update = this.HudManager.method<void>("Update");
         this.Vent_CanUse = this.Vent.method<boolean>("CanUse", 3);
 
@@ -64,6 +68,14 @@ export class PlayerModule extends BaseModule {
             return this.method<void>("LateUpdate").invoke();
         };
 
+        // @ts-ignore
+        this.PlayerPurchasesData_GetPurchase.implementation = function (itemKey: Il2Cpp.String, bundleKey: Il2Cpp.String): boolean {
+            if (State.unlockCosmetics){
+                return true;
+            }
+            return this.method<boolean>("GetPurchase", 2).invoke(itemKey, bundleKey);
+        };
+
         this.HudManager_Update.implementation = function (): void {
             const HudManagerInstance = UnityUtils.getInstance(module.HudManager);
             // @ts-ignore
@@ -84,25 +96,24 @@ export class PlayerModule extends BaseModule {
             const shadowQuad = HudManagerInstance.field("ShadowQuad").value as Il2Cpp.Object;
             const shadowQuadGameObject = UnityUtils.getGameObject(shadowQuad);
 
-            if (State.noShadows){
+            if (State.noShadows) {
                 shadowQuadGameObject.method("SetActive", 1).invoke(false);
-            }
-            else{
+            } else {
                 shadowQuadGameObject.method("SetActive", 1).invoke(true);
             }
 
-            if (!canVent && !isDead){
+            if (!canVent && !isDead) {
                 impostorVentButtonGameObject.method<void>("SetActive", 1).invoke(State.unlockVents);
             }
 
             return this.method<void>("Update").invoke();
-        }
+        };
 
         //@ts-ignore
         this.Vent_CanUse.implementation = function (pc: Il2Cpp.Object, canUse: boolean, couldUse: boolean): boolean {
             // TODO: add implementation from Vent.CanUse: https://github.com/scp222thj/MalumMenu/blob/main/src/Patches/VentPatches.cs
 
             return this.method<boolean>("CanUse", 3).invoke(pc, canUse, couldUse);
-        }
+        };
     }
 }

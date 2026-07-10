@@ -7,6 +7,7 @@ export const State = {
     unlockVents: false,
     walkInVents: false,
 
+    unlockCosmetics: false,
     disableAnalytics: false,
     uwuifyMode: false
 };

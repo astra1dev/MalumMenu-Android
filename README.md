@@ -44,6 +44,10 @@
 - Kick all from Vents
 - Walk in Vents
 
+### Passive
+
+- Unlock Cosmetics
+
 ### Other
 
 - UwUify Game
