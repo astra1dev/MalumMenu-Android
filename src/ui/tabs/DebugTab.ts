@@ -16,6 +16,8 @@ export class DebugTab{
             `Frida v${Frida.version} (runtime: ${Script.runtime})`,
             `Architecture: ${Process.arch}`,
             `Platform: ${Process.platform}`,
+            `PID: ${Process.id}`,
+            `Unity Version: ${Il2Cpp.unityVersion}`,
             `Android version: ${Java.androidVersion}`
         ];
         for (const text of debugText) {
