@@ -144,7 +144,7 @@ You can also inspect the MainActivity (`EosUnityPlayerActivity.smali`) to see th
 
 The loading process goes like this: Injected loadLibrary code in smali → loads frida-gadget itself → frida-gadget reads the config file → loads our script → waits for the script's init function to return → launches the game itself
 
-If you are using a patcher that doesn't have the feature to wait before rebuilding, you can verify that frida-gadget was added to the APK by installing the APK on your device and opening the open-source LibChecker app. 
+If you are using a patcher that doesn't have the feature to wait before rebuilding, you can verify that frida-gadget was added to the APK by installing the APK on your device and opening the open-source [LibChecker](https://github.com/LibChecker/LibChecker) app. 
 In the "Native libraries" tab you should see the above 3 files (the script.so and config.so will show "broken ELF", but that's expected since they're not supposed to be ELF files).
 
 <img src="https://github.com/user-attachments/assets/dda3165a-453a-4721-9d39-ed98527dd717" alt="LibChecker showing the 3 frida-gadget files">
