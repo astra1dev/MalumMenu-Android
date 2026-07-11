@@ -17,8 +17,6 @@ export class PlayerModule extends BaseModule {
     private HudManager_Update!: Il2Cpp.Method;
     private Vent_CanUse!: Il2Cpp.Method;
 
-    private LocalPlayer?: Il2Cpp.Field;
-
     public init(): void {
         this.PlayerControl = AssemblyHelper.AssemblyCSharp.class("PlayerControl");
         this.PlayerPhysics = AssemblyHelper.AssemblyCSharp.class("PlayerPhysics");
@@ -30,26 +28,21 @@ export class PlayerModule extends BaseModule {
         this.PlayerPurchasesData_GetPurchase = this.PlayerPurchasesData.method<boolean>("GetPurchase");
         this.HudManager_Update = this.HudManager.method<void>("Update");
         this.Vent_CanUse = this.Vent.method<boolean>("CanUse", 3);
-
-        this.LocalPlayer = this.PlayerControl.field("LocalPlayer");
     }
 
     public override initHooks(): void {
         const module = this;
 
         this.PlayerPhysics_LateUpdate.implementation = function (): void {
-            //const myPlayer = module.PlayerPhysics.field("myPlayer") as Il2Cpp.Object;
-
-            // static field: public static PlayerControl LocalPlayer;
-            // @ts-ignore
-            const localPlayer = module.LocalPlayer.value as Il2Cpp.Object;
+            //const myPlayer = module.PlayerPhysics.field<Il2Cpp.Object>("myPlayer");
+            const localPlayer = module.localPlayer;
 
             if (localPlayer.isNull()) {
                 return this.method<void>("LateUpdate").invoke();
             }
 
             // instance field: public Collider2D Collider;
-            const collider = localPlayer.field("Collider").value as Il2Cpp.Object;
+            const collider = localPlayer.field<Il2Cpp.Object>("Collider").value; 
 
             if (State.noclip) {
                 collider.method("set_enabled").invoke(false);
@@ -57,12 +50,12 @@ export class PlayerModule extends BaseModule {
                 collider.method("set_enabled").invoke(true);
             }
 
-            const myPhysics = localPlayer.field("MyPhysics").value as Il2Cpp.Object;
+            const myPhysics = localPlayer.field<Il2Cpp.Object>("MyPhysics").value;
 
             if (State.customSpeed) {
-                myPhysics.field("Speed").value = State.speed;
+                myPhysics.field<number>("Speed").value = State.speed;
             } else {
-                myPhysics.field("Speed").value = 2.5;
+                myPhysics.field<number>("Speed").value = 2.5;
             }
 
             return this.method<void>("LateUpdate").invoke();
@@ -70,7 +63,7 @@ export class PlayerModule extends BaseModule {
 
         // @ts-ignore
         this.PlayerPurchasesData_GetPurchase.implementation = function (itemKey: Il2Cpp.String, bundleKey: Il2Cpp.String): boolean {
-            if (State.unlockCosmetics){
+            if (State.unlockCosmetics) {
                 return true;
             }
             return this.method<boolean>("GetPurchase", 2).invoke(itemKey, bundleKey);
@@ -78,28 +71,28 @@ export class PlayerModule extends BaseModule {
 
         this.HudManager_Update.implementation = function (): void {
             const HudManagerInstance = UnityUtils.getInstance(module.HudManager);
-            // @ts-ignore
-            const localPlayer = module.LocalPlayer.value as Il2Cpp.Object;
-            if (localPlayer.isNull()) {
+            const localPlayer = module.localPlayer;
+
+            if (HudManagerInstance == null || localPlayer.isNull()) {
                 return this.method<void>("Update").invoke();
             }
 
+            // NetworkedPlayerInfo
             const data = localPlayer.method<Il2Cpp.Object>("get_Data").invoke();
-            const role = data.field("Role").value as Il2Cpp.Object;
-            const canVent = role.field("CanVent").value;
-            const isDead = data.field("IsDead").value;
-            // @ts-ignore
-            const impostorVentButton = HudManagerInstance.field("ImpostorVentButton").value as Il2Cpp.Object;
+            // RoleBehaviour
+            const role = data.field<Il2Cpp.Object>("Role").value;
+            const canVent = role.field<boolean>("CanVent").value;
+            const isDead = data.field<boolean>("IsDead").value;
+            const impostorVentButton = HudManagerInstance.field<Il2Cpp.Object>("ImpostorVentButton").value;
             const impostorVentButtonGameObject = UnityUtils.getGameObject(impostorVentButton);
 
-            // @ts-ignore
-            const shadowQuad = HudManagerInstance.field("ShadowQuad").value as Il2Cpp.Object;
+            const shadowQuad = HudManagerInstance.field<Il2Cpp.Object>("ShadowQuad").value;
             const shadowQuadGameObject = UnityUtils.getGameObject(shadowQuad);
 
             if (State.noShadows) {
-                shadowQuadGameObject.method("SetActive", 1).invoke(false);
+                shadowQuadGameObject.method<void>("SetActive", 1).invoke(false);
             } else {
-                shadowQuadGameObject.method("SetActive", 1).invoke(true);
+                shadowQuadGameObject.method<void>("SetActive", 1).invoke(true);
             }
 
             if (!canVent && !isDead) {
@@ -115,5 +108,14 @@ export class PlayerModule extends BaseModule {
 
             return this.method<boolean>("CanUse", 3).invoke(pc, canUse, couldUse);
         };
+    }
+
+    /** 
+     * `static PlayerControl::LocalPlayer` 
+     * 
+     * @returns `PlayerControl` instance
+    */
+    private get localPlayer(): Il2Cpp.Object {
+        return this.PlayerControl.field<Il2Cpp.Object>("LocalPlayer").value;
     }
 }
