@@ -7,7 +7,7 @@ import { UnityUtils } from "../../utils/UnityUtils";
 import { ShipModule } from "../../modules/Ship";
 
 export class ShipTab {
-    static draw(layout: ObsidianLayout){
+    static draw(layout: ObsidianLayout) {
         const ship = layout.textView(I18n.t("menu.tabs.ship"));
         ship.gravity = CENTER;
         add(ship);

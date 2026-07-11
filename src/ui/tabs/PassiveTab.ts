@@ -13,7 +13,7 @@ export class PassiveTab {
             layout.toggle(I18n.t("menu.functions.unlock_cosmetics"), (state: boolean) => {
                 State.unlockCosmetics = state;
             })
-        )
+        );
 
         add(
             layout.toggle(I18n.t("menu.functions.disable_analytics"), (state: boolean) => {

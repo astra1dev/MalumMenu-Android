@@ -183,4 +183,8 @@ export class UnityUtils {
     static setEnabledComponent(component: Il2Cpp.Object, state: boolean): void {
         return component.method<void>("set_enabled").invoke(state);
     }
+
+    static cachedPtr(object: Il2Cpp.Object): Il2Cpp.Pointer {
+        return object.field<Il2Cpp.Pointer>("m_CachedPtr").value;
+    }
 }

@@ -6,8 +6,8 @@ import { I18n } from "../../i18n/I18n";
 import { JavaUtils } from "../../utils/JavaUtils";
 import { UnityUtils } from "../../utils/UnityUtils";
 
-export class DebugTab{
-    static draw(layout: ObsidianLayout){
+export class DebugTab {
+    static draw(layout: ObsidianLayout) {
         const debugTab = layout.textView(I18n.t("menu.tabs.debug"));
         debugTab.gravity = CENTER;
         add(debugTab);

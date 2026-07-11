@@ -9,9 +9,10 @@ import { Logger } from "../logger/Logger";
 export class ModuleManager {
     public readonly name = "ModuleManager";
 
+    // prettier-ignore
     private static modules: BaseModule[] = [
-        new UwUifyModule(),
-        new ShipModule(),
+        new UwUifyModule(), 
+        new ShipModule(), 
         new PlayerModule()
     ];
 
