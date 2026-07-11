@@ -35,14 +35,14 @@ export class ShipModule extends BaseModule {
                 const localPlayer = module.localPlayer;
 
                 if (localPlayer.isNull()) {
-                    return returnValue; 
+                    return returnValue;
                 }
 
                 localPlayer.field<boolean>("inVent").value = false;
                 localPlayer.field("moveable").value = true;
             }
 
-            return returnValue; 
+            return returnValue;
         };
     }
 
@@ -50,7 +50,7 @@ export class ShipModule extends BaseModule {
         const module = this;
 
         const localPlayer = module.localPlayer;
-        if (localPlayer.isNull()){
+        if (localPlayer.isNull()) {
             Logger.warn(`[${module.name}::callMeeting] LocalPlayer is null`);
             return;
         }
@@ -109,11 +109,11 @@ export class ShipModule extends BaseModule {
         HudManagerInstance.method<void>("ToggleMapVisible", 1).invoke(opt);
     }
 
-    /** 
-     * `static PlayerControl::LocalPlayer` 
-     * 
+    /**
+     * `static PlayerControl::LocalPlayer`
+     *
      * @returns `PlayerControl` instance
-    */
+     */
     private get localPlayer(): Il2Cpp.Object {
         return this.PlayerControl.field<Il2Cpp.Object>("LocalPlayer").value;
     }

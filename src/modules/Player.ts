@@ -1,7 +1,6 @@
 import { AssemblyHelper } from "../core/AssemblyHelper";
 import { BaseModule } from "../core/BaseModule";
 import { State } from "../data/State";
-import { Logger } from "../logger/Logger";
 import { UnityUtils } from "../utils/UnityUtils";
 
 export class PlayerModule extends BaseModule {
@@ -38,17 +37,17 @@ export class PlayerModule extends BaseModule {
             //const myPlayer = module.PlayerPhysics.field<Il2Cpp.Object>("myPlayer");
             const localPlayer = module.localPlayer;
 
-            // If we re-enter to the map, localPlayer.handle points to dead memory 
+            // If we re-enter to the map, localPlayer.handle points to dead memory
             // To prevent this, we check the internal Unity m_CachedPtr for 0x0
             // Since it's always pointing to real memory
             const cachedPtr = UnityUtils.cachedPtr(localPlayer);
 
-            if (localPlayer.isNull() || cachedPtr.isNull()) { 
+            if (localPlayer.isNull() || cachedPtr.isNull()) {
                 return this.method<void>("LateUpdate").invoke();
             }
 
             // instance field: public Collider2D Collider;
-            const collider = localPlayer.field<Il2Cpp.Object>("Collider").value; 
+            const collider = localPlayer.field<Il2Cpp.Object>("Collider").value;
 
             if (State.noclip) {
                 collider.method("set_enabled").invoke(false);
@@ -116,11 +115,11 @@ export class PlayerModule extends BaseModule {
         };
     }
 
-    /** 
-     * `static PlayerControl::LocalPlayer` 
-     * 
+    /**
+     * `static PlayerControl::LocalPlayer`
+     *
      * @returns `PlayerControl` instance
-    */
+     */
     private get localPlayer(): Il2Cpp.Object {
         return this.PlayerControl.field<Il2Cpp.Object>("LocalPlayer").value;
     }

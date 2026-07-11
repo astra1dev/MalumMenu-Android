@@ -15,15 +15,11 @@ export class OtherTab {
         add(other);
 
         add(
-            layout.radioGroup(
-                I18n.t("menu.other.language"),
-                I18n.getLocalisedLanguages(),
-                (index: number) => {
-                    const selectedLocale = I18n.supportedLocales[index];
-                    I18n.changeLocale(selectedLocale);
-                    toast(I18n.t("menu.toasts.on_locale_changed", I18n.getLocalisedLanguages()[index]), 0);
-                }
-            )
+            layout.radioGroup(I18n.t("menu.other.language"), I18n.getLocalisedLanguages(), (index: number) => {
+                const selectedLocale = I18n.supportedLocales[index];
+                I18n.changeLocale(selectedLocale);
+                toast(I18n.t("menu.toasts.on_locale_changed", I18n.getLocalisedLanguages()[index]), 0);
+            })
         );
 
         add(layout.button(I18n.t("menu.other.github_url"), () => JavaUtils.openURL(Constants.GITHUB_URL)));

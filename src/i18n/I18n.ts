@@ -10,7 +10,7 @@ import de from "./localization/de.json";
 
 const TRANSLATIONS: Record<string, any> = {
     en: en,
-    de: de,
+    de: de
 };
 
 export class I18n {
