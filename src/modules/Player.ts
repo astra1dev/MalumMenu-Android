@@ -1,6 +1,7 @@
 import { AssemblyHelper } from "../core/AssemblyHelper";
 import { BaseModule } from "../core/BaseModule";
 import { State } from "../data/State";
+import { Logger } from "../logger/Logger";
 import { UnityUtils } from "../utils/UnityUtils";
 
 export class PlayerModule extends BaseModule {
@@ -37,7 +38,12 @@ export class PlayerModule extends BaseModule {
             //const myPlayer = module.PlayerPhysics.field<Il2Cpp.Object>("myPlayer");
             const localPlayer = module.localPlayer;
 
-            if (localPlayer.isNull()) {
+            // If we re-enter to the map, localPlayer.handle points to dead memory 
+            // To prevent this, we check the internal Unity m_CachedPtr for 0x0
+            // Since it's always pointing to real memory
+            const cachedPtr = UnityUtils.cachedPtr(localPlayer);
+
+            if (localPlayer.isNull() || cachedPtr.isNull()) { 
                 return this.method<void>("LateUpdate").invoke();
             }
 
