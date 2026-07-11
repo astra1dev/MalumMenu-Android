@@ -26,3 +26,4 @@ data/
 
 # frida-il2cpp-bridge dumps
 dump/
+app_process64/
