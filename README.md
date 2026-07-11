@@ -82,7 +82,7 @@ Download and install the .apk from [releases](https://github.com/astra1dev/Malum
 - **Q:** The menu doesn't appear.  
 **A:** Ensure you granted the "Display over other apps" permission. The game should ask for it on the first launch. If not, grant it manually.
 
-- **Q:** Do I need to uninstall the original Among Us before using MalumMenu-Android?
+- **Q:** Do I need to uninstall the original Among Us before using MalumMenu-Android?  
 **A:** Currently yes, as MalumMenu-Android has the same package name, but this may change in the future.
 
 # 👷‍♂️ Compiling
