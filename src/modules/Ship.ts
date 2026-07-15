@@ -90,23 +90,26 @@ export class ShipModule extends BaseModule {
     public openSabotageMap(): void {
         const module = this;
 
+        const HudManagerInstanceExists = module.HudManager.method<boolean>("get_InstanceExists").invoke();
+        if (!HudManagerInstanceExists) {
+            Logger.warn(`[${module.name}::openSabotageMap] HudManagerInstance does not exist`);
+            return;
+        }
+
         const HudManagerInstance = UnityUtils.getInstance(module.HudManager);
 
-        if (HudManagerInstance == undefined) {
+        if (HudManagerInstance == null) {
             Logger.warn(`[${module.name}::openSabotageMap] HudManagerInstance is null`);
             return;
         }
 
-        // DestroyableSingleton<HudManager>.Instance.ToggleMapVisible(new MapOptions
-        // {
-        //     Mode = MapOptions.Modes.Sabotage
-        // });
+        const MapOptions = UnityUtils.createInstance(module.MapOptions);
+        const Modes = module.MapOptions.nested("Modes");
+        const Sabotage = Modes.field("Sabotage");
 
-        const opt = UnityUtils.createInstance(module.MapOptions);
-        // MapOptions.Modes.Sabotage = 3
-        opt.field("Mode").value = 3;
+        MapOptions.field("Mode").value = Sabotage.value;
 
-        HudManagerInstance.method<void>("ToggleMapVisible", 1).invoke(opt);
+        HudManagerInstance.method<void>("ToggleMapVisible", 1).invoke(MapOptions);
     }
 
     /**

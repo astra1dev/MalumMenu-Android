@@ -1,4 +1,4 @@
-import { ObsidianLayout, add, CENTER } from "frida-java-menu";
+import { add, CENTER, ObsidianLayout } from "frida-java-menu";
 
 import { I18n } from "../../i18n/I18n";
 import { State } from "../../data/State";
@@ -26,12 +26,12 @@ export class ShipTab {
             )
         );
 
-        // add(
-        //     layout.button(
-        //         I18n.t("menu.functions.open_sabotage_map"),
-        //         UnityUtils.run(() => ModuleManager.get(ShipModule)?.openSabotageMap())
-        //     )
-        // );
+        add(
+            layout.button(
+                I18n.t("menu.functions.open_sabotage_map"),
+                UnityUtils.run(() => ModuleManager.get(ShipModule)?.openSabotageMap())
+            )
+        );
 
         add(
             layout.toggle(I18n.t("menu.functions.unlock_vents"), (state: boolean) => {
