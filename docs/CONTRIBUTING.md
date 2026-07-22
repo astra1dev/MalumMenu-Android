@@ -94,15 +94,15 @@ Let's talk about how we can actually embed frida-gadget into among us. The proce
 - Embed frida-gadget
 - Repackage the APK
 
-These steps can be done manually (takes longer) or by using automated tools (faster and more reliable),
+These steps can be done manually (takes longer) or by using automated tools (faster and more reliable).
 
 If you want to do the process manually, check out [this post](https://koz.io/using-frida-on-android-without-root/).
 
 There's at least 3 different tools capable of patching an app to embed frida-gadget:
 
-- objection by sensepost
-- fgi by commonuserlol
-- frida-gadget by ksg97031 (yes, the project name is confusing. also, this tool didn't work for me)
+- [objection](https://github.com/sensepost/objection) ([Guide](https://github.com/sensepost/objection/wiki/Patching-Android-Applications))
+- [fgi](https://github.com/commonuserlol/fgi)
+- [frida-gadget](https://github.com/ksg97031/frida-gadget) (yes, the project name is confusing. also, this tool didn't work for me)
 
 There may be other (and possibly better) tools available.
 
