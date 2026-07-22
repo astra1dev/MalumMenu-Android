@@ -45,7 +45,6 @@
         "typescript-eslint": "^8.47.0"
     },
     "dependencies": {
-        "buffer": "^6.0.3",
         "frida-il2cpp-bridge": "^0.13.1",
         "frida-java-bridge": "^7.0.13",
         "frida-java-menu": "github:astra1dev/frida-java-menu"
