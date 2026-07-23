@@ -2,13 +2,16 @@ import { AssemblyHelper } from "../core/AssemblyHelper";
 import { BaseModule } from "../core/BaseModule";
 import { State } from "../data/State";
 import { UnityUtils } from "../utils/UnityUtils";
+import { Logger } from "../logger/Logger";
 
 export class PlayerModule extends BaseModule {
     public readonly name = "Player";
 
     private Vector2!: Il2Cpp.Class;
 
+    private AmongUsClient!: Il2Cpp.Class;
     private Constants!: Il2Cpp.Class;
+    private NetworkModes!: Il2Cpp.Class;
     private PhysicsHelpers!: Il2Cpp.Class;
     private PlayerControl!: Il2Cpp.Class;
     private PlayerPhysics!: Il2Cpp.Class;
@@ -27,7 +30,9 @@ export class PlayerModule extends BaseModule {
     public init(): void {
         this.Vector2 = AssemblyHelper.CoreModule.class("UnityEngine.Vector2");
 
+        this.AmongUsClient = AssemblyHelper.AssemblyCSharp.class("AmongUsClient");
         this.Constants = AssemblyHelper.AssemblyCSharp.class("Constants");
+        this.NetworkModes = AssemblyHelper.AssemblyCSharp.class("NetworkModes");
         this.PhysicsHelpers = AssemblyHelper.AssemblyCSharp.class("PhysicsHelpers");
         this.PlayerControl = AssemblyHelper.AssemblyCSharp.class("PlayerControl");
         this.PlayerPhysics = AssemblyHelper.AssemblyCSharp.class("PlayerPhysics");
@@ -169,6 +174,74 @@ export class PlayerModule extends BaseModule {
             couldUse.value = true;
             return num;
         };
+    }
+
+    public completeMyTasks(): void {
+        const module = this;
+
+        const localPlayer = module.localPlayer;
+        if (localPlayer.isNull()) {
+            Logger.warn(`[${module.name}::completeMyTasks] LocalPlayer is null`);
+            return;
+        }
+
+        const amongUsClientInstance = module.AmongUsClient.field<Il2Cpp.Object>("Instance").value;
+        if (amongUsClientInstance == null) {
+            Logger.warn(`[${module.name}::completeMyTasks] AmongUsClient.Instance is null`);
+            return;
+        }
+
+        // System.Collections.Generic.List<PlayerTask> myTasks;
+        const myTasks = localPlayer.field<Il2Cpp.Object>("myTasks").value;
+
+        // Iterate over the list. Source: https://github.com/vfsfitvnm/frida-il2cpp-bridge/issues/556
+        const taskCount = myTasks.method<number>("get_Count").invoke();
+        for (let i = 0; i < taskCount; i++) {
+            const task = myTasks.method<Il2Cpp.Object>("get_Item").invoke(i);
+
+            const id = task.method<number>("get_Id").invoke();
+            const networkMode = amongUsClientInstance.field("NetworkMode").value;
+            const freePlay = module.NetworkModes.field("FreePlay").value;
+
+            // .toString() is quite ugly, there's probably a better way of doing this
+            if (networkMode.toString() == freePlay.toString()) {
+                Logger.debug("completing task!");
+                localPlayer.method("RpcCompleteTask").invoke(id);
+                continue;
+            }
+
+            const isComplete = task.method<boolean>("get_IsComplete").invoke();
+            if (isComplete) {
+                return;
+            }
+
+            const hostData = amongUsClientInstance.method<Il2Cpp.Object>("GetHost").invoke();
+            if (hostData == null) {
+                Logger.warn(`[${module.name}::completeMyTasks] GetHost is null`);
+                return;
+            }
+
+            const character = hostData.field<Il2Cpp.Object>("Character").value;
+            const data = character.method<Il2Cpp.Object>("get_Data").invoke();
+            const disconnected = data.field<boolean>("Disconnected").value;
+            if (disconnected) {
+                return;
+            }
+
+            const allPlayerControls = module.PlayerControl.field<Il2Cpp.Object>("AllPlayerControls").value;
+            const netId = module.localPlayer.field("NetId").value;
+
+            const numPlayerControls = allPlayerControls.method<number>("get_Count").invoke();
+            for (let j = 0; j < numPlayerControls; j++) {
+                const playerControl = allPlayerControls.method<Il2Cpp.Object>("get_Item").invoke(j);
+
+                const clientId = amongUsClientInstance.method<number>("GetClientIdFromCharacter").invoke(playerControl);
+                // Send CompleteTask RPC to every player. 1 = RpcCalls.CompleteTask, 1 = SendOption.Reliable
+                const messageWriter = amongUsClientInstance.method<Il2Cpp.Object>("StartRpcImmediately").invoke(netId, 1, 1, clientId);
+                messageWriter.method("WritePacked").invoke(id);
+                amongUsClientInstance.method("FinishRpcImmediately").invoke(messageWriter);
+            }
+        }
     }
 
     /**

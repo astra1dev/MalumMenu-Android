@@ -12,6 +12,7 @@
             "debug": "<b>——— Debug ———</b>",
             "movement": "<b>——— Movement ———</b>",
             "esp": "<b>——— ESP ———</b>",
+            "roles": "<b>——— Roles ———</b>",
             "ship": "<b>——— Ship ———</b>",
             "passive": "<b>——— Passive ———</b>",
             "other": "<b>——— Other ———</b>"
@@ -24,6 +25,8 @@
             "speed_val": "Custom Speed: {0} / 20",
 
             "no_shadows": "No Shadows",
+
+            "complete_my_tasks": "Complete My Tasks",
 
             "call_meeting": "Call Meeting",
             "sabotage_reactor": "Sabotage Reactor",

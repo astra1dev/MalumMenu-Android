@@ -12,6 +12,7 @@ import { Logger } from "../logger/Logger";
 import { DebugTab } from "./tabs/DebugTab";
 import { MovementTab } from "./tabs/MovementTab";
 import { ESPTab } from "./tabs/ESPTab";
+import { RolesTab } from "./tabs/RolesTab";
 import { ShipTab } from "./tabs/ShipTab";
 import { PassiveTab } from "./tabs/PassiveTab";
 import { OtherTab } from "./tabs/OtherTab";
@@ -42,6 +43,7 @@ export class MenuUI {
         DebugTab.draw(MenuUI.layout);
         MovementTab.draw(MenuUI.layout);
         ESPTab.draw(MenuUI.layout);
+        RolesTab.draw(MenuUI.layout);
         ShipTab.draw(MenuUI.layout);
         PassiveTab.draw(MenuUI.layout);
         OtherTab.draw(MenuUI.layout);
