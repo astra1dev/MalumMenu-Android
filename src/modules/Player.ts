@@ -59,7 +59,13 @@ export class PlayerModule extends BaseModule {
             // If we leave and re-join a game, localPlayer.handle points to dead memory
             // To prevent this, we check the internal Unity m_CachedPtr for 0x0
             // Since it's always pointing to real memory
-            const cachedPtr = UnityUtils.cachedPtr(localPlayer);
+            let cachedPtr: Il2Cpp.Pointer;
+            try{
+                cachedPtr = UnityUtils.cachedPtr(localPlayer);
+            } catch (e) {
+                Logger.debug(e + " (This error is expected due to m_CachedPtr not being set yet)");
+                return this.method<void>("LateUpdate").invoke();
+            }
 
             if (localPlayer.isNull() || cachedPtr.isNull()) {
                 return this.method<void>("LateUpdate").invoke();
@@ -103,10 +109,6 @@ export class PlayerModule extends BaseModule {
 
             // NetworkedPlayerInfo
             const data = localPlayer.method<Il2Cpp.Object>("get_Data").invoke();
-            // RoleBehaviour
-            const role = data.field<Il2Cpp.Object>("Role").value;
-            const canVent = role.field<boolean>("CanVent").value;
-            const isDead = data.field<boolean>("IsDead").value;
             const impostorVentButton = HudManagerInstance.field<Il2Cpp.Object>("ImpostorVentButton").value;
             const impostorVentButtonGameObject = UnityUtils.getGameObject(impostorVentButton);
 
@@ -118,6 +120,18 @@ export class PlayerModule extends BaseModule {
             } else {
                 shadowQuadGameObject.method<void>("SetActive", 1).invoke(true);
             }
+
+            let role: Il2Cpp.Object;
+            let canVent: boolean;
+            try {
+                // RoleBehaviour
+                role = data.field<Il2Cpp.Object>("Role").value;
+                canVent = role.field<boolean>("CanVent").value;
+            } catch (e) {
+                Logger.debug(e + " (This error is expected due to Role field not being set yet)");
+                return this.method<void>("Update").invoke();
+            }
+            const isDead = data.field<boolean>("IsDead").value;
 
             if (!canVent && !isDead) {
                 impostorVentButtonGameObject.method<void>("SetActive", 1).invoke(State.unlockVents);
@@ -205,7 +219,6 @@ export class PlayerModule extends BaseModule {
 
             // .toString() is quite ugly, there's probably a better way of doing this
             if (networkMode.toString() == freePlay.toString()) {
-                Logger.debug("completing task!");
                 localPlayer.method("RpcCompleteTask").invoke(id);
                 continue;
             }
