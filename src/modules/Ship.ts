@@ -49,6 +49,12 @@ export class ShipModule extends BaseModule {
     public callMeeting(): void {
         const module = this;
 
+        const ShipStatusInstance = module.ShipStatus.field<Il2Cpp.Object>("Instance").value;
+        if (ShipStatusInstance.isNull()) {
+            Logger.warn(`[${module.name}::callMeeting] ShipStatusInstance is null`);
+            return;
+        }
+
         const localPlayer = module.localPlayer;
         if (localPlayer.isNull()) {
             Logger.warn(`[${module.name}::callMeeting] LocalPlayer is null`);
