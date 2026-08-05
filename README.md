@@ -52,10 +52,10 @@
 ### Passive
 
 - Unlock Cosmetics
+- UwUify Game
 
 ### Other
 
-- UwUify Game
 - Show Unity Logs
 
 # 🔥 Releases

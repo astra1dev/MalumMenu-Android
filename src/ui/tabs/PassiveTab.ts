@@ -2,6 +2,9 @@ import { ObsidianLayout, add, CENTER } from "frida-java-menu";
 
 import { I18n } from "../../i18n/I18n";
 import { State } from "../../data/State";
+import { UwUifyModule } from "../../modules/UwUify";
+import { UnityUtils } from "../../utils/UnityUtils";
+import { ModuleManager } from "../../core/ModuleManager";
 
 export class PassiveTab {
     static draw(layout: ObsidianLayout) {
@@ -19,6 +22,16 @@ export class PassiveTab {
             layout.toggle(I18n.t("menu.functions.disable_analytics"), (state: boolean) => {
                 State.disableAnalytics = state;
             })
+        );
+
+        add(
+            layout.toggle(
+                I18n.t("menu.functions.uwuify"),
+                UnityUtils.run((state: boolean) => {
+                    State.uwuifyMode = state;
+                    ModuleManager.get(UwUifyModule)?.toggleUwUify(state);
+                })
+            )
         );
     }
 }
