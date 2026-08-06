@@ -21,6 +21,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 
 ### Fixed
 
+- Ensure ghosts can see through walls when No Shadows is disabled (restore vanilla behavior)
 - Black screen after one game by [@repinek] ([#6])
 
 ## [1.0.1] - 2026-07-10

@@ -133,6 +133,10 @@ export class PlayerModule extends BaseModule {
             }
             const isDead = data.field<boolean>("IsDead").value;
 
+            if (isDead) {
+                shadowQuadGameObject.method<void>("SetActive", 1).invoke(false);
+            }
+
             if (!canVent && !isDead) {
                 impostorVentButtonGameObject.method<void>("SetActive", 1).invoke(State.unlockVents);
             }
