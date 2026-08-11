@@ -5,6 +5,7 @@ import { State } from "../../data/State";
 import { UwUifyModule } from "../../modules/UwUify";
 import { UnityUtils } from "../../utils/UnityUtils";
 import { ModuleManager } from "../../core/ModuleManager";
+import { PassiveModule } from "../../modules/Passive";
 
 export class PassiveTab {
     static draw(layout: ObsidianLayout) {
@@ -16,6 +17,16 @@ export class PassiveTab {
             layout.toggle(I18n.t("menu.functions.unlock_cosmetics"), (state: boolean) => {
                 State.unlockCosmetics = state;
             })
+        );
+
+        add(
+            layout.toggle(
+                I18n.t("menu.functions.full_resolution"),
+                UnityUtils.run((state: boolean) => {
+                    State.fullResolution = state;
+                    ModuleManager.get(PassiveModule)?.toggleFullResolution(state);
+                })
+            )
         );
 
         add(

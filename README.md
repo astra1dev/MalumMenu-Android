@@ -51,7 +51,8 @@
 
 ### Passive
 
-- Unlock Cosmetics
+- Unlock Cosmetics (Hats, Visors, Skins, Pets, Nameplates, Cosmicubes, Bundles)
+- Full Resolution (By default, the game runs at half resolution)
 - UwUify Game
 
 ### Other

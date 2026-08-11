@@ -8,6 +8,7 @@ export const State = {
     walkInVents: false,
 
     unlockCosmetics: false,
+    fullResolution: false,
     disableAnalytics: false,
     uwuifyMode: false
 };
