@@ -16,6 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 ### Changed
 
 - Move UwUify Game from Other Tab to Passive Tab
+- Bump frida from 17.16.4 to 17.17.0 by [@dependabot] ([#22])
 - Bump frida from 17.16.3 to 17.16.4 by [@dependabot] ([#11])
 - Bump frida from 17.15.5 to 17.16.3 by [@dependabot] ([#10])
 - Bump frida from 17.15.4 to 17.15.5 by [@dependabot] ([#7])
@@ -41,6 +42,7 @@ Initial release
 [@repinek]: https://github.com/repinek
 [@dependabot]: https://github.com/dependabot
 
+[#22]: https://github.com/astra1dev/MalumMenu-Android/pull/22
 [#11]: https://github.com/astra1dev/MalumMenu-Android/pull/11
 [#10]: https://github.com/astra1dev/MalumMenu-Android/pull/10
 [#7]: https://github.com/astra1dev/MalumMenu-Android/pull/7
