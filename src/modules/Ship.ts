@@ -29,20 +29,18 @@ export class ShipModule extends BaseModule {
         const module = this;
 
         this.ShipStatus_FixedUpdate.implementation = function (): void {
-            const returnValue = this.method<void>("FixedUpdate").invoke();
-
             if (State.walkInVents) {
                 const localPlayer = module.localPlayer;
 
                 if (localPlayer.isNull()) {
-                    return returnValue;
+                    return this.method<void>("FixedUpdate").invoke();
                 }
 
                 localPlayer.field<boolean>("inVent").value = false;
-                localPlayer.field("moveable").value = true;
+                localPlayer.field<boolean>("moveable").value = true;
             }
 
-            return returnValue;
+            return this.method<void>("FixedUpdate").invoke();
         };
     }
 

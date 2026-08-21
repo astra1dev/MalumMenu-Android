@@ -60,7 +60,7 @@ export class PlayerModule extends BaseModule {
             // To prevent this, we check the internal Unity m_CachedPtr for 0x0
             // Since it's always pointing to real memory
             let cachedPtr: Il2Cpp.Pointer;
-            try{
+            try {
                 cachedPtr = UnityUtils.cachedPtr(localPlayer);
             } catch (e) {
                 Logger.debug(e + " (This error is expected due to m_CachedPtr not being set yet)");
@@ -188,7 +188,8 @@ export class PlayerModule extends BaseModule {
             const shipOnlyMask = module.Constants.field<number>("ShipOnlyMask").value;
 
             // Allow usage of vents unless the vent is too far or there are objects blocking the player's path
-            canUse.value = num <= usableDistance && !module.PhysicsHelpers_AnythingBetween.invoke(collider, centerVector2, positionVector2, shipOnlyMask, false);
+            canUse.value =
+                num <= usableDistance && !module.PhysicsHelpers_AnythingBetween.invoke(collider, centerVector2, positionVector2, shipOnlyMask, false);
             couldUse.value = true;
             return num;
         };

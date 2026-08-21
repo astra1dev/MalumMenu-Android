@@ -1,5 +1,6 @@
 import { BaseModule } from "./BaseModule";
 
+import { PassiveModule } from "../modules/Passive";
 import { PlayerModule } from "../modules/Player";
 import { ShipModule } from "../modules/Ship";
 import { UwUifyModule } from "../modules/UwUify";
@@ -11,9 +12,10 @@ export class ModuleManager {
 
     // prettier-ignore
     private static modules: BaseModule[] = [
-        new UwUifyModule(), 
-        new ShipModule(), 
-        new PlayerModule()
+        new PassiveModule(),
+        new PlayerModule(),
+        new ShipModule(),
+        new UwUifyModule()
     ];
 
     /** Initializes all modules by calling init() in module */

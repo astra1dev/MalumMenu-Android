@@ -1,6 +1,6 @@
 import Java from "frida-java-bridge";
 
-import { ObsidianLayout, add, toast, CENTER } from "frida-java-menu";
+import { add, CENTER, ObsidianLayout, toast } from "frida-java-menu";
 
 import { I18n } from "../../i18n/I18n";
 import { JavaUtils } from "../../utils/JavaUtils";
@@ -14,11 +14,11 @@ export class DebugTab {
 
         const debugText = [
             `Frida v${Frida.version} (runtime: ${Script.runtime})`,
+            `Unity version: ${Il2Cpp.unityVersion}`,
+            `Android version: ${Java.androidVersion}`,
             `Architecture: ${Process.arch}`,
             `Platform: ${Process.platform}`,
-            `PID: ${Process.id}`,
-            `Unity Version: ${Il2Cpp.unityVersion}`,
-            `Android version: ${Java.androidVersion}`
+            `PID: ${Process.id}`
         ];
         for (const text of debugText) {
             add(layout.textView(text));

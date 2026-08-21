@@ -1,4 +1,4 @@
-import { ObsidianLayout, add, CENTER } from "frida-java-menu";
+import { add, CENTER, ObsidianLayout } from "frida-java-menu";
 
 import { I18n } from "../../i18n/I18n";
 import { State } from "../../data/State";
