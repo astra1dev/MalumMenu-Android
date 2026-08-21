@@ -15,6 +15,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 
 ### Changed
 
+- Bump TypeScript from 5.6.3 to 6.0.3
 - Move UwUify Game from Other Tab to Passive Tab
 - Bump frida from 17.16.4 to 17.17.0 by [@dependabot] ([#22])
 - Bump frida from 17.16.3 to 17.16.4 by [@dependabot] ([#11])
