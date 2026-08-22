@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 
 ### Added
 
+- Use system accent color for UI elements
 - Full Resolution
 - Complete My Tasks
 - Unlock Vents

@@ -1,4 +1,4 @@
-import { ObsidianConfig as ObsCfg } from "frida-java-menu";
+import { ObsidianConfig as ObsCfg, systemAccentColor } from "frida-java-menu";
 
 import { I18n } from "../i18n/I18n";
 
@@ -6,7 +6,7 @@ export const ObsidianConfig: ObsCfg = {
     color: {
         primaryText: "#FFFFFF",
         secondaryText: "#FFFFFF",
-        buttonBg: "#326647",
+        buttonBg: systemAccentColor(),
         layoutBg: "#1C1C1C",
         collapseBg: "#3B3B3B",
         categoryBg: "#296368",
