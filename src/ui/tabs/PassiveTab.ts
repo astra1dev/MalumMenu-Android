@@ -23,7 +23,6 @@ export class PassiveTab {
             layout.toggle(
                 I18n.t("menu.functions.full_resolution"),
                 UnityUtils.run((state: boolean) => {
-                    State.fullResolution = state;
                     ModuleManager.get(PassiveModule)?.toggleFullResolution(state);
                 })
             )
