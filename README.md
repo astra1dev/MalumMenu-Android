@@ -52,14 +52,14 @@
 ### Passive
 
 - Unlock Cosmetics (Hats, Visors, Skins, Pets, Nameplates, Cosmicubes, Bundles)
-- Full Resolution (By default, the game runs at half resolution)
+- Full Resolution (The game runs at half resolution by default)
 - UwUify Game
 
 ### Other
 
 - Show Unity Logs
 
-# 🔥 Releases
+# 💾 Installation
 
 Before you download anything, make sure your platform is supported:
 
@@ -67,15 +67,9 @@ Before you download anything, make sure your platform is supported:
 - ❓ Custom / OEM ROMs (may or may not work)
 - ❌ Emulators (`frida-java-bridge`, which is required for the menu, doesn't work on them)
 
-The table below lists the most recent MalumMenu-Android release for each Among Us version. Release notes can be found below each new [release](../../releases) and in [CHANGELOG.md](/docs/CHANGELOG.md).
-
-|    Among Us Version     |      MalumMenu-Android Version      |
-|:-----------------------:|:-----------------------------------:|
-|  `17.4.0` (`2026.6.5`)  | [v1.0.1](../../releases/tag/v1.0.1) |
-
-# 💾 Installation
-
 Download and install the .apk from [releases](https://github.com/astra1dev/MalumMenu-Android/releases/latest).
+
+Release notes can be found below each [release](../../releases) and in [CHANGELOG.md](/docs/CHANGELOG.md).
 
 > [!WARNING]
 > This mod relies on the unstable `frida-java-bridge`. Random crashes and inconsistent behavior may occur.
@@ -89,7 +83,7 @@ Download and install the .apk from [releases](https://github.com/astra1dev/Malum
 **A:** Ensure you granted the "Display over other apps" permission. The game should ask for it on the first launch. If not, grant it manually.
 
 - **Q:** Do I need to uninstall the original Among Us before using MalumMenu-Android?  
-**A:** Currently yes, as MalumMenu-Android has the same package name, but this may change in the future.
+**A:** Currently yes, as MalumMenu-Android has the same package name, but this may change in the future. In the meantime, you can use an app like [AEE](https://github.com/apk-editor/APK-Explorer-Editor) or [ReVanced](https://github.com/revanced/revanced-manager) that allows you to change the package name.
 
 # 👷‍♂️ Compiling
 
@@ -125,9 +119,7 @@ npm install
 ### Getting the original game APK
 
 - `pip install gplaydl`
-- `gplaydl auth`
-- `gplaydl download com.innersloth.spacemafia`
-- Copy the 4 downloaded apks to `./data/split`
+- `gplaydl download com.innersloth.spacemafia -a arm64 -o data/split`
 
 ### Merging the split APKs
 
@@ -166,7 +158,7 @@ You should also periodically ensure code quality:
 
 ### Listen Mode
 
-If you are modifying the code, use this mode to avoid rebuilding the APK constantly.
+If you are modifying the code, use this mode to avoid having to rebuild the APK constantly.
 
 - Inject Frida into APK: `objection patchapk -s data/build.apk -a arm64-v8a -V 17.17.0`
 - Connect your device via ADB and run `adb install -i com.android.vending data/build.objection.apk` to install the APK on your device. (You can also manually copy the APK to your device and install it, but this is the fastest way)

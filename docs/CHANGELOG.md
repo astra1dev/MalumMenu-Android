@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 
 ## [Unreleased]
 
+## [2.0.0] - 2026-08-23
+
+The released APK comes with game version `18.0.0` (`2026.8.18`).
+
 ### Added
 
 - Use system accent color for UI elements
@@ -50,6 +54,7 @@ Initial release
 [#7]: https://github.com/astra1dev/MalumMenu-Android/pull/7
 [#6]: https://github.com/astra1dev/MalumMenu-Android/pull/6
 
-[unreleased]: https://github.com/astra1dev/MalumMenu-Android/compare/v1.0.1...HEAD
+[unreleased]: https://github.com/astra1dev/MalumMenu-Android/compare/v2.0.0...HEAD
+[2.0.0]: https://github.com/astra1dev/MalumMenu-Android/compare/v1.0.1...v2.0.0
 [1.0.1]: https://github.com/astra1dev/MalumMenu-Android/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/astra1dev/MalumMenu-Android/releases/tag/v1.0.0
