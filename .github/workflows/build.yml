@@ -1,0 +1,64 @@
+name: CI
+
+on: [ "push", "pull_request" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v7
+    - uses: actions/setup-python@v7
+    - uses: actions/setup-node@v7
+    - uses: actions/setup-java@v6
+      with:
+        distribution: temurin
+        java-version: '25'
+    - name: Install python dependencies
+      run: |
+        pip install -r requirements.txt
+        pip install gplaydl
+    - name: Build script in dev mode
+      run: |
+        mkdir dist
+        npm install
+        npm run build:dev
+    - name: Download APKEditor
+      run: |
+        wget -O APKEditor.jar https://github.com/REAndroid/APKEditor/releases/download/V1.4.9/APKEditor-1.4.9.jar
+    - name: Download apktool
+      run: |
+        wget -O apktool.jar https://github.com/iBotPeaches/Apktool/releases/download/v3.0.3/apktool_3.0.3.jar
+        wget -O apktool https://raw.githubusercontent.com/iBotPeaches/Apktool/master/scripts/linux/apktool
+        chmod +x apktool
+        sudo mv apktool.jar /usr/local/bin/apktool.jar
+        sudo mv apktool /usr/local/bin/apktool
+    - name: Download Among Us Split APKs
+      env:
+        DISPENSER_URL: ${{ secrets.DISPENSER_URL }}
+      run: |
+        gplaydl download com.innersloth.spacemafia -a arm64 -o data/split -d "$DISPENSER_URL"
+    - name: Merge split APKs
+      run: |
+        java -jar APKEditor.jar m -i data/split -o data/merged.apk
+    - name: Edit merged APK
+      run: |
+        java -jar APKEditor.jar d -i data/merged.apk -o data/edited
+        python patch_manifest.py
+    - name: Build edited APK
+      run: |
+        java -jar APKEditor.jar b -i data/edited -o data/build.apk
+    - name: Inject script into APK
+      run: |
+        objection patchapk -c objection.cfg.json -s data/build.apk -l dist/agent.js -a arm64-v8a -V 17.17.0
+        mv data/build.objection.apk data/MalumMenu.apk
+    - name: Upload script artifact
+      uses: actions/upload-artifact@v7
+      with:
+        path: dist/agent.js
+        archive: false
+    - name: Upload APK artifact
+      uses: actions/upload-artifact@v7
+      with:
+        path: data/MalumMenu.apk
+        archive: false

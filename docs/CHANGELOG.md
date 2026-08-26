@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 
 ## [Unreleased]
 
+### Added
+
+- GitHub Actions CI workflow to build and upload the script and APK on every commit
+
 ## [2.0.0] - 2026-08-23
 
 The released APK comes with game version `18.0.0` (`2026.8.18`).
