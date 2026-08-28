@@ -6,7 +6,7 @@ export const ObsidianConfig: ObsCfg = {
     color: {
         primaryText: "#FFFFFF",
         secondaryText: "#FFFFFF",
-        buttonBg: systemAccentColor(),
+        buttonBg: systemAccentColor("#326647"),
         layoutBg: "#1C1C1C",
         collapseBg: "#3B3B3B",
         categoryBg: "#296368",
