@@ -14,6 +14,9 @@ jobs:
       with:
         distribution: temurin
         java-version: '25'
+    - run: |
+        sudo apt-get update
+        sudo apt-get install aapt adb apksigner zipalign
     - name: Install python dependencies
       run: |
         pip install -r requirements.txt
@@ -34,10 +37,11 @@ jobs:
         sudo mv apktool.jar /usr/local/bin/apktool.jar
         sudo mv apktool /usr/local/bin/apktool
     - name: Download Among Us Split APKs
-      env:
-        DISPENSER_URL: ${{ secrets.DISPENSER_URL }}
       run: |
-        gplaydl download com.innersloth.spacemafia -a arm64 -o data/split -d "$DISPENSER_URL"
+        mkdir -p data/split
+        wget -O data/split/com.innersloth.spacemafia-7240.apk https://github.com/astra2dev/SuperSussy/releases/download/2026.8.18/com.innersloth.spacemafia-7240.apk
+        wget -O data/split/com.innersloth.spacemafia-7240-config.arm64_v8a.apk https://github.com/astra2dev/SuperSussy/releases/download/2026.8.18/com.innersloth.spacemafia-7240-config.arm64_v8a.apk
+        wget -O data/split/com.innersloth.spacemafia-7240-UnityDataAssetPack.apk https://github.com/astra2dev/SuperSussy/releases/download/2026.8.18/com.innersloth.spacemafia-7240-UnityDataAssetPack.apk
     - name: Merge split APKs
       run: |
         java -jar APKEditor.jar m -i data/split -o data/merged.apk
