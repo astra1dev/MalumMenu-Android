@@ -40,12 +40,11 @@
             "disable_analytics": "Disable Analytics",
 
             "uwuify": "UwU?",
-            "select_platform": "Select Platform",
-            "keyboard_mode": "Keyboard Mode"
+            "keyboard_mode": "Keyboard Mode",
+            "keyboard_mode_note": "Requires a physical keyboard. Touch controls may not work."
         },
         "other": {
             "language": "Select Language",
-            "keyboard_mode_note": "Requires a physical keyboard. Touch controls may not work.",
             "github_url": "GitHub Repository (Leave a star!)",
             "discord_url": "Discord Server",
             "malummenu_url": "Check Out MalumMenu for PC!",

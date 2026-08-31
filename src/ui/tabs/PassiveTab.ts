@@ -49,6 +49,6 @@ export class PassiveTab {
                 State.keyboardMode = state;
             })
         );
-        add(layout.textView(I18n.t("menu.other.keyboard_mode_note")));
+        add(layout.textView(I18n.t("menu.functions.keyboard_mode_note")));
     }
 }
