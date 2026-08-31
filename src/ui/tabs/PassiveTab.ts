@@ -43,5 +43,12 @@ export class PassiveTab {
                 })
             )
         );
+
+        add(
+            layout.toggle(I18n.t("menu.functions.keyboard_mode"), (state: boolean) => {
+                State.keyboardMode = state;
+            })
+        );
+        add(layout.textView(I18n.t("menu.functions.keyboard_mode_note")));
     }
 }

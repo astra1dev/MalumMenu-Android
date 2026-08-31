@@ -40,7 +40,8 @@
             "disable_analytics": "Disable Analytics",
 
             "uwuify": "UwU?",
-            "select_platform": "Select Platform"
+            "keyboard_mode": "Keyboard Mode",
+            "keyboard_mode_note": "Requires a physical keyboard. Touch controls may not work."
         },
         "other": {
             "language": "Select Language",
