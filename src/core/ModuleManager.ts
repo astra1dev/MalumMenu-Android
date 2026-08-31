@@ -1,5 +1,6 @@
 import { BaseModule } from "./BaseModule";
 
+import { KeyboardModule } from "../modules/Keyboard";
 import { PassiveModule } from "../modules/Passive";
 import { PlayerModule } from "../modules/Player";
 import { ShipModule } from "../modules/Ship";
@@ -12,6 +13,7 @@ export class ModuleManager {
 
     // prettier-ignore
     private static modules: BaseModule[] = [
+        new KeyboardModule(),
         new PassiveModule(),
         new PlayerModule(),
         new ShipModule(),

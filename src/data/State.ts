@@ -9,5 +9,6 @@ export const State = {
 
     unlockCosmetics: false,
     disableAnalytics: false,
-    uwuifyMode: false
+    uwuifyMode: false,
+    keyboardMode: false
 };
