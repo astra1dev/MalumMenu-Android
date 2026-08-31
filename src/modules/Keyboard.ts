@@ -22,12 +22,12 @@ export class KeyboardModule extends BaseModule {
 
         this.ActiveInputManager_UpdateActiveControlType = this.ActiveInputManager.method<void>("UpdateActiveControlType", 0);
         this.ActiveInputManager_OnLastActiveControllerChanged = this.ActiveInputManager.method<void>("OnLastActiveControllerChanged", 2);
-        this.ActiveInputManager_ShouldEnableTouch= this.ActiveInputManager.method<boolean>("ShouldEnableTouch", 0);
+        this.ActiveInputManager_ShouldEnableTouch = this.ActiveInputManager.method<boolean>("ShouldEnableTouch", 0);
 
         // Nested enum
         const InputType = AssemblyHelper.AssemblyCSharp.class("ActiveInputManager/InputType");
         this.keyboardInputValue = InputType.field<Il2Cpp.ValueType>("Keyboard").value;
-        
+
         const ControlTypes = AssemblyHelper.AssemblyCSharp.class("ControlTypes");
         this.keyboardControlValue = ControlTypes.field<Il2Cpp.ValueType>("Keyboard").value;
 
@@ -51,20 +51,20 @@ export class KeyboardModule extends BaseModule {
         this.ActiveInputManager_ShouldEnableTouch.implementation = function (): boolean {
             if (!State.keyboardMode) return this.method<boolean>("ShouldEnableTouch").invoke();
             return false;
-        }
+        };
 
         // type: ControlTypes enum
         // @ts-ignore
         this.HudManager_SetTouchType.implementation = function (type: Il2Cpp.ValueType): void {
             const returnArg = State.keyboardMode ? module.keyboardControlValue : type;
             this.method<void>("SetTouchType").invoke(returnArg);
-        }
+        };
     }
 
     /**
-     * Sets `ActiveInputManager.currentControlType` to `ActiveInputManager.InputType.Keyboard` 
+     * Sets `ActiveInputManager.currentControlType` to `ActiveInputManager.InputType.Keyboard`
      */
     private setKeyboardMode(): void {
         this.ActiveInputManager.field("currentControlType").value = this.keyboardInputValue;
-    };
+    }
 }

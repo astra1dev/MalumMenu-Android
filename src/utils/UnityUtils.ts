@@ -185,12 +185,12 @@ export class UnityUtils {
     }
 
     /**
-     * Wrapper over `m_CachedPtr` field 
-     * 
+     * Wrapper over `m_CachedPtr` field
+     *
      * Use it to check whether a Unity Object has been destroyed
      * but still returns a non-zero address
-     * 
-     * @param object 
+     *
+     * @param object
      */
     static cachedPtr(object: Il2Cpp.Object): Il2Cpp.Pointer {
         return object.field<Il2Cpp.Pointer>("m_CachedPtr").value;
