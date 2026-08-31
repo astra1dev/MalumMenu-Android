@@ -185,7 +185,10 @@ export class UnityUtils {
     }
 
     /**
-     * Wrapper over `m_cachedPtr` field 
+     * Wrapper over `m_CachedPtr` field 
+     * 
+     * Use it to check whether a Unity Object has been destroyed
+     * but still returns a non-zero address
      * 
      * @param object 
      */
