@@ -184,6 +184,11 @@ export class UnityUtils {
         return component.method<void>("set_enabled").invoke(state);
     }
 
+    /**
+     * Wrapper over `m_cachedPtr` field 
+     * 
+     * @param object 
+     */
     static cachedPtr(object: Il2Cpp.Object): Il2Cpp.Pointer {
         return object.field<Il2Cpp.Pointer>("m_CachedPtr").value;
     }
