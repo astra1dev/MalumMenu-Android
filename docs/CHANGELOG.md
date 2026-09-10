@@ -10,6 +10,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 
 - GitHub Actions CI workflow to build and upload the script and APK on every commit
 
+### Changed
+
+- Bump frida-il2cpp-bridge from 0.13.2 to 0.14.0 by [@dependabot] ([#45])
+
 ## [2.0.0] - 2026-08-23
 
 The released APK comes with game version `18.0.0` (`2026.8.18`).
@@ -52,6 +56,7 @@ Initial release
 [@repinek]: https://github.com/repinek
 [@dependabot]: https://github.com/dependabot
 
+[#45]: https://github.com/astra1dev/MalumMenu-Android/pull/45
 [#22]: https://github.com/astra1dev/MalumMenu-Android/pull/22
 [#11]: https://github.com/astra1dev/MalumMenu-Android/pull/11
 [#10]: https://github.com/astra1dev/MalumMenu-Android/pull/10
