@@ -17,22 +17,17 @@ jobs:
 
     - run: |
         sudo apt-get update
-        sudo apt-get install aapt adb apksigner zipalign
+        sudo apt-get install aapt adb apksigner zipalign expect
 
     - name: Install python dependencies
       run: |
         pip install -r requirements.txt
-        pip install gplaydl
 
     - name: Build script in dev mode
       run: |
         mkdir dist
         npm install
         npm run build:dev
-
-    - name: Download APKEditor
-      run: |
-        wget -O APKEditor.jar https://github.com/REAndroid/APKEditor/releases/download/V1.4.9/APKEditor-1.4.9.jar
 
     - name: Download apktool
       run: |
@@ -42,30 +37,16 @@ jobs:
         sudo mv apktool.jar /usr/local/bin/apktool.jar
         sudo mv apktool /usr/local/bin/apktool
 
-    - name: Download Among Us Split APKs
+    - name: Download Among Us APK
       run: |
-        mkdir -p data/split
-        wget -O data/split/com.innersloth.spacemafia-7240.apk https://github.com/astra2dev/SuperSussy/releases/download/2026.8.18/com.innersloth.spacemafia-7240.apk
-        wget -O data/split/com.innersloth.spacemafia-7240-config.arm64_v8a.apk https://github.com/astra2dev/SuperSussy/releases/download/2026.8.18/com.innersloth.spacemafia-7240-config.arm64_v8a.apk
-        wget -O data/split/com.innersloth.spacemafia-7240-UnityDataAssetPack.apk https://github.com/astra2dev/SuperSussy/releases/download/2026.8.18/com.innersloth.spacemafia-7240-UnityDataAssetPack.apk
-
-    - name: Merge split APKs
-      run: |
-        java -jar APKEditor.jar m -i data/split -o data/merged.apk
-
-    - name: Edit merged APK
-      run: |
-        java -jar APKEditor.jar d -i data/merged.apk -o data/edited
-        python patch_manifest.py
-
-    - name: Build edited APK
-      run: |
-        java -jar APKEditor.jar b -i data/edited -o data/build.apk
+        mkdir data
+        wget -O data/AmongUs.apk https://github.com/astra2dev/SuperSussy/releases/latest/download/AmongUs.apk
 
     - name: Inject script into APK
       run: |
-        objection patchapk -c objection.cfg.json -s data/build.apk -l dist/agent.js -a arm64-v8a -V 17.17.0
-        mv data/build.objection.apk data/MalumMenu.apk
+        chmod +x tools/inject_script.sh
+        tools/inject_script.sh
+        mv data/AmongUs.objection.apk data/MalumMenu.apk
 
     - name: Upload script artifact
       uses: actions/upload-artifact@v7

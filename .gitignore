@@ -19,7 +19,6 @@ dist/
 
 # Frida
 frida-server/
-tools/
 
 # APK storage
 data/
