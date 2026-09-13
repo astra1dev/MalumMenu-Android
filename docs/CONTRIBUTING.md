@@ -111,10 +111,14 @@ Under the hood, these tools make use of other, more specialized tools, for examp
 - `apktool` or `APKEditor` to extract and rebuild APK files
 - `jarsigner` or `apksigner` for signing the APKs so they can be installed on phones
 
-Before repackaging the APK, the permission to display over other apps also needs to be added by modifying `AndroidManifest.xml` manually so MalumMenu-Android can display itself on top of the game.
+Before repackaging the APK, the permission to display over other apps also needs to be added by modifying `AndroidManifest.xml` so MalumMenu-Android can display itself on top of the game.
 
 (If we're using the listen interaction, we also need to add `android.permission.INTERNET` so frida-gadget can expose the interface for the PC to connect to. Among Us already has the INTERNET permission, so we actually don't have to do this.
 In script mode, this wouldn't be needed anyway as the script works fully standalone without connecting to a frida-server)
+
+Optionally, the package name can be changed so MalumMenu-Android can be installed alongside the original game. This is done by setting `package="com.astra1dev.MalumMenu"` in `AndroidManifest.xml`.
+
+The app's display name can also be changed by setting `<string name="app_name">MalumMenu</string>` in `res/values/strings.xml`.
 
 ## Verifying the embedding process (advanced)
 

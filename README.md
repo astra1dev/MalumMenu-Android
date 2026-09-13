@@ -104,10 +104,8 @@ Requirements:
 git clone https://github.com/astra1dev/MalumMenu-Android
 cd MalumMenu-Android
 
-# Create a virtual environment (Not necessary, but considered good practice)
+# Create and activate a virtual environment (Not necessary, but considered good practice)
 python -m venv .venv
-
-# Activate the virtual environment
 source .venv/bin/activate
 
 # Install Frida and objection
@@ -117,26 +115,17 @@ pip install -r requirements.txt
 npm install
 ```
 
-### Getting the original game APK
+### Get the original game APK
 
-- `pip install gplaydl`
-- `gplaydl download com.innersloth.spacemafia -a arm64 -o data/split`
+This can be done in multiple ways:
 
-### Merging the split APKs
+- `pip install gplaydl && gplaydl download com.innersloth.spacemafia -a arm64 -o data/split`
+- Extract the APK from your phone. Many different apps can do this.
+- Download the "Demo" APK from [here](https://innersloth.itch.io/among-us).
 
-- Download the latest `.jar` from [APKEditor releases](https://github.com/REAndroid/APKEditor/releases/latest)
-- `java -jar APKEditor.jar m -i data/split -o data/merged.apk`
-
-### Editing the merged APK
-
-- Decompile the merged APK: `java -jar APKEditor.jar d -i data/merged.apk -o data/edited`
-- Edit `AndroidManifest.xml` in a text editor to add overlay permission: `<uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>`
-- Optional: Change `package="com.astra1dev.MalumMenu"`
-- Optional: Change the app display name: `resources/package_1/res/values/strings.xml` Among Us to MalumMenu
-
-### Building the edited APK
-
-- `java -jar APKEditor.jar b -i data/edited -o data/build.apk`
+Save the APK as `data/AmongUs.apk`. If the APK you got is split into multiple APKs, you need to merge them into a single APK.
+You can do this with [APKEditor](https://github.com/REAndroid/APKEditor/releases/latest):
+`java -jar APKEditor.jar m -i data/split -o data/AmongUs.apk`
 
 ## Development workflow
 
@@ -153,18 +142,44 @@ You should also periodically ensure code quality:
 
 ### Script Mode
 
-- Inject script into APK: `objection patchapk -c objection.cfg.json -s data/build.apk -l dist/agent.js -a arm64-v8a -V 17.17.0`
-- Connect your device via ADB and run `adb install -i com.android.vending data/build.objection.apk` to install the APK on your device. (You can also manually copy the APK to your device and install it, but this is the fastest way)
-- Start the game. The first time you start it, it will ask for "Display over other apps" permission. You should now see the mod icon in the top left corner.
+If you are not modifying the code, use this mode to build and install the APK with the script already embedded.
+
+```sh
+# Embed script into APK
+objection patchapk -c objection.cfg.json -s data/AmongUs.apk -l dist/agent.js -a arm64-v8a -V 17.17.0 --pause
+
+# In a new terminal session, patch the manifest to add overlay permission
+# Replace TEMP_DIR with the path to the temp directory objection tells you.
+python tools/patch_manifest.py TEMP_DIR
+# Now go back to the previous terminal session and press Enter to tell objection to continue
+
+# Connect your device via ADB, then install the APK on your device
+# You can also manually copy the APK to your device and install it, but this is the fastest way
+adb install -i com.android.vending data/AmongUs.objection.apk
+```
+
+Start the game. The first time you start it, it will ask for "Display over other apps" permission. You should now see the mod icon in the top left corner.
 
 ### Listen Mode
 
-If you are modifying the code, use this mode to avoid having to rebuild the APK constantly.
+If you are modifying the code, use this mode so you don't have to rebuild and reinstall the APK on every change.
 
-- Inject Frida into APK: `objection patchapk -s data/build.apk -a arm64-v8a -V 17.17.0`
-- Connect your device via ADB and run `adb install -i com.android.vending data/build.objection.apk` to install the APK on your device. (You can also manually copy the APK to your device and install it, but this is the fastest way)
+```sh
+# Embed frida-gadget into APK
+objection patchapk -s data/AmongUs.apk -a arm64-v8a -V 17.17.0 --pause
+
+# In a new terminal session, patch the manifest to add overlay permission
+# Replace TEMP_DIR with the path to the temp directory objection tells you.
+python tools/patch_manifest.py TEMP_DIR
+# Now go back to the previous terminal session and press Enter to tell objection to continue
+
+# Connect your device via ADB, then install the APK on your device
+# You can also manually copy the APK to your device and install it, but this is the fastest way
+adb install -i com.android.vending data/AmongUs.objection.apk
+```
+
 - Start the game. The first time you start it, it will ask for "Display over other apps" permission. 
-- Every time you start the game, it will immediately pause and wait until you manually inject the script. (If you check `adb logcat`, something similar to `Frida: Listening on TCP port 27042` should be shown)
+- Every time you start the game, it will immediately pause and wait until you manually spawn the script. (If you check `adb logcat`, something similar to `Frida: Listening on TCP port 27042` should be shown)
 - `npm run spawn` - spawn script in gadget mode
 - `npm run spawn:server` - spawn script using frida-server (app name needs to be "Among Us")
 - You should now see the mod icon in the top left corner.
@@ -178,7 +193,7 @@ See [CONTRIBUTING.md](docs/CONTRIBUTING.md)
 - [Frida](https://frida.re/) - dynamic instrumentation toolkit
 - [frida-il2cpp-bridge](https://github.com/vfsfitvnm/frida-il2cpp-bridge/) - hijack any IL2CPP game at runtime
 - [frida-java-menu](https://github.com/astra1dev/frida-java-menu) - create custom floating menus on Android
-- [objection](https://github.com/sensepost/objection) - runtime mobile exploration toolkit (used to inject Frida into APKs)
+- [objection](https://github.com/sensepost/objection) - runtime mobile exploration toolkit (used to embed frida-gadget into APKs)
 - [fallguys-frida-modmenu](https://github.com/repinek/fallguys-frida-modmenu) - main inspiration for this project, utils & modules & i18n logic
 - [MalumMenu](https://github.com/scp222thj/MalumMenu) - Among Us cheat menu for PC
 - [gplaydl](https://github.com/rehmatworks/gplaydl) - CLI Google Play Store APK downloader
