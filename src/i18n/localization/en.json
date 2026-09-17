@@ -1,7 +1,8 @@
 {
     "languages": {
         "en": "English",
-        "de": "German"
+        "de": "German",
+        "ru": "Russian"
     },
     "menu": {
         "info": {

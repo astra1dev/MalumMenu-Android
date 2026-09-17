@@ -7,10 +7,12 @@ import { Logger } from "../logger/Logger";
 
 import en from "./localization/en.json";
 import de from "./localization/de.json";
+import ru from "./localization/ru.json";
 
 const TRANSLATIONS: Record<string, any> = {
     en: en,
-    de: de
+    de: de,
+    ru: ru
 };
 
 export class I18n {
