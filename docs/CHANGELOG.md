@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 
 ### Added
 
+- Russian localization by [@repinek] ([#55])
 - Keyboard Mode by [@repinek] ([#38])
 - GitHub Actions CI workflow to build and upload the script and APK on every commit
 
@@ -58,6 +59,7 @@ Initial release
 [@repinek]: https://github.com/repinek
 [@dependabot]: https://github.com/dependabot
 
+[#55]: https://github.com/astra1dev/MalumMenu-Android/pull/55
 [#50]: https://github.com/astra1dev/MalumMenu-Android/pull/50
 [#45]: https://github.com/astra1dev/MalumMenu-Android/pull/45
 [#38]: https://github.com/astra1dev/MalumMenu-Android/pull/38
