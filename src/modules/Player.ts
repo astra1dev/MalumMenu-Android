@@ -100,10 +100,10 @@ export class PlayerModule extends BaseModule {
         };
 
         this.HudManager_Update.implementation = function (): void {
-            const HudManagerInstance = UnityUtils.getInstance(module.HudManager);
+            const HudManagerInstance = module.HudManager.method<Il2Cpp.Object>("get_Instance").invoke();
             const localPlayer = module.localPlayer;
 
-            if (HudManagerInstance == null || localPlayer.isNull()) {
+            if (HudManagerInstance.isNull() || localPlayer.isNull()) {
                 return this.method<void>("Update").invoke();
             }
 
@@ -205,7 +205,7 @@ export class PlayerModule extends BaseModule {
         }
 
         const amongUsClientInstance = module.AmongUsClient.field<Il2Cpp.Object>("Instance").value;
-        if (amongUsClientInstance == null) {
+        if (amongUsClientInstance.isNull()) {
             Logger.warn(`[${module.name}::completeMyTasks] AmongUsClient.Instance is null`);
             return;
         }
@@ -234,7 +234,7 @@ export class PlayerModule extends BaseModule {
             }
 
             const hostData = amongUsClientInstance.method<Il2Cpp.Object>("GetHost").invoke();
-            if (hostData == null) {
+            if (hostData.isNull()) {
                 Logger.warn(`[${module.name}::completeMyTasks] GetHost is null`);
                 continue;
             }

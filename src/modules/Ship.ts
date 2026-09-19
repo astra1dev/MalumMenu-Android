@@ -100,13 +100,8 @@ export class ShipModule extends BaseModule {
             return;
         }
 
-        const HudManagerInstance = UnityUtils.getInstance(module.HudManager);
-
-        if (HudManagerInstance == null) {
-            Logger.warn(`[${module.name}::openSabotageMap] HudManagerInstance is null`);
-            return;
-        }
-
+        // No isNull check here because we trust that InstanceExists tells the truth
+        const HudManagerInstance = module.HudManager.method<Il2Cpp.Object>("get_Instance").invoke();
         const MapOptions = UnityUtils.createInstance(module.MapOptions);
         const Modes = module.MapOptions.nested("Modes");
         const Sabotage = Modes.field("Sabotage");
