@@ -230,20 +230,20 @@ export class PlayerModule extends BaseModule {
 
             const isComplete = task.method<boolean>("get_IsComplete").invoke();
             if (isComplete) {
-                return;
+                continue;
             }
 
             const hostData = amongUsClientInstance.method<Il2Cpp.Object>("GetHost").invoke();
             if (hostData == null) {
                 Logger.warn(`[${module.name}::completeMyTasks] GetHost is null`);
-                return;
+                continue;
             }
 
             const character = hostData.field<Il2Cpp.Object>("Character").value;
             const data = character.method<Il2Cpp.Object>("get_Data").invoke();
             const disconnected = data.field<boolean>("Disconnected").value;
             if (disconnected) {
-                return;
+                continue;
             }
 
             const allPlayerControls = module.PlayerControl.field<Il2Cpp.Object>("AllPlayerControls").value;
