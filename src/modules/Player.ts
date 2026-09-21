@@ -195,6 +195,15 @@ export class PlayerModule extends BaseModule {
         };
     }
 
+    public completeTask(task: Il2Cpp.Object): void {
+        const module = this;
+        const localPlayer = module.localPlayer;
+
+        const taskId = task.method<number>("get_Id").invoke();
+        // const isComplete = task.method<boolean>("get_IsComplete").invoke();
+        localPlayer.method("RpcCompleteTask").invoke(taskId);
+    }
+
     public completeMyTasks(): void {
         const module = this;
 
@@ -204,61 +213,15 @@ export class PlayerModule extends BaseModule {
             return;
         }
 
-        const amongUsClientInstance = module.AmongUsClient.field<Il2Cpp.Object>("Instance").value;
-        if (amongUsClientInstance.isNull()) {
-            Logger.warn(`[${module.name}::completeMyTasks] AmongUsClient.Instance is null`);
-            return;
-        }
-
         // System.Collections.Generic.List<PlayerTask> myTasks;
         const myTasks = localPlayer.field<Il2Cpp.Object>("myTasks").value;
 
         // Iterate over the list. Source: https://github.com/vfsfitvnm/frida-il2cpp-bridge/issues/556
         const taskCount = myTasks.method<number>("get_Count").invoke();
+        Logger.debug(`[${module.name}::completeMyTasks] Found ${taskCount} tasks`);
         for (let i = 0; i < taskCount; i++) {
             const task = myTasks.method<Il2Cpp.Object>("get_Item").invoke(i);
-
-            const id = task.method<number>("get_Id").invoke();
-            const networkMode = amongUsClientInstance.field("NetworkMode").value;
-            const freePlay = module.NetworkModes.field("FreePlay").value;
-
-            // .toString() is quite ugly, there's probably a better way of doing this
-            if (networkMode.toString() == freePlay.toString()) {
-                localPlayer.method("RpcCompleteTask").invoke(id);
-                continue;
-            }
-
-            const isComplete = task.method<boolean>("get_IsComplete").invoke();
-            if (isComplete) {
-                continue;
-            }
-
-            const hostData = amongUsClientInstance.method<Il2Cpp.Object>("GetHost").invoke();
-            if (hostData.isNull()) {
-                Logger.warn(`[${module.name}::completeMyTasks] GetHost is null`);
-                continue;
-            }
-
-            const character = hostData.field<Il2Cpp.Object>("Character").value;
-            const data = character.method<Il2Cpp.Object>("get_Data").invoke();
-            const disconnected = data.field<boolean>("Disconnected").value;
-            if (disconnected) {
-                continue;
-            }
-
-            const allPlayerControls = module.PlayerControl.field<Il2Cpp.Object>("AllPlayerControls").value;
-            const netId = module.localPlayer.field("NetId").value;
-
-            const numPlayerControls = allPlayerControls.method<number>("get_Count").invoke();
-            for (let j = 0; j < numPlayerControls; j++) {
-                const playerControl = allPlayerControls.method<Il2Cpp.Object>("get_Item").invoke(j);
-
-                const clientId = amongUsClientInstance.method<number>("GetClientIdFromCharacter").invoke(playerControl);
-                // Send CompleteTask RPC to every player. 1 = RpcCalls.CompleteTask, 1 = SendOption.Reliable
-                const messageWriter = amongUsClientInstance.method<Il2Cpp.Object>("StartRpcImmediately").invoke(netId, 1, 1, clientId);
-                messageWriter.method("WritePacked").invoke(id);
-                amongUsClientInstance.method("FinishRpcImmediately").invoke(messageWriter);
-            }
+            module.completeTask(task);
         }
     }
 

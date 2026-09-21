@@ -14,8 +14,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 
 ### Changed
 
+- Complete My Tasks can now be spammed in Hide n Seek to quickly reduce the hiding time
 - Bump frida from 17.17.0 to 17.18.0 by [@dependabot] ([#50])
 - Bump frida-il2cpp-bridge from 0.13.2 to 0.14.0 by [@dependabot] ([#45])
+
+### Fixed
+
+- Properly check for Il2Cpp objects being null
+- Ensure Complete My Tasks completes all tasks
 
 ## [2.0.0] - 2026-08-23
 
