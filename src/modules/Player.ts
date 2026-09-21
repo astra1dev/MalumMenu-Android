@@ -84,8 +84,10 @@ export class PlayerModule extends BaseModule {
 
             if (State.customSpeed) {
                 myPhysics.field<number>("Speed").value = State.speed;
+                myPhysics.field<number>("GhostSpeed").value = State.speed;
             } else {
                 myPhysics.field<number>("Speed").value = 2.5;
+                myPhysics.field<number>("GhostSpeed").value = 3;
             }
 
             return this.method<void>("LateUpdate").invoke();

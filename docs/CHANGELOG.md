@@ -20,6 +20,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 
 ### Fixed
 
+- Make custom speed affect ghost speed too
 - Properly check for Il2Cpp objects being null
 - Ensure Complete My Tasks completes all tasks
 
