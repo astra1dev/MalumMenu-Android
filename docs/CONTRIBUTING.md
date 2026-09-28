@@ -67,6 +67,9 @@ If you notice any mistakes or inconsistencies in the existing translations, feel
 
 # How this project uses Frida
 
+[This post](https://pit.bearblog.dev/modding-and-distributing-mobile-apps-with-frida/) explains how Frida can be used to mod and distribute Android apps.
+The process is pretty much the same, but it may be easier to understand than what I've written here.
+
 ## Frida Operation Modes
 
 Source: https://frida.re/docs/gadget/

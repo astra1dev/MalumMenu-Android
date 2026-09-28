@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 
 ## [Unreleased]
 
+## [2.1.0] - 2026-09-28
+
+The released APK comes with game version `18.0.0` (`2026.8.18`).
+
 ### Added
 
 - Russian localization by [@repinek] ([#55])
@@ -14,12 +18,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 
 ### Changed
 
+- Released APKs are now based on the itch.io original Among Us APK instead of split APKs from Google Play. 
+  This means released APKs are roughly 200 MB smaller than before (800 MB instead of 1 GB)
 - Complete My Tasks can now be spammed in Hide n Seek to quickly reduce the hiding time
 - Bump frida from 17.17.0 to 17.18.0 by [@dependabot] ([#50])
 - Bump frida-il2cpp-bridge from 0.13.2 to 0.14.0 by [@dependabot] ([#45])
 
 ### Fixed
 
+- The menu no longer opens after dragging the icon
 - Make custom speed affect ghost speed too
 - Properly check for Il2Cpp objects being null
 - Ensure Complete My Tasks completes all tasks
@@ -76,7 +83,8 @@ Initial release
 [#7]: https://github.com/astra1dev/MalumMenu-Android/pull/7
 [#6]: https://github.com/astra1dev/MalumMenu-Android/pull/6
 
-[unreleased]: https://github.com/astra1dev/MalumMenu-Android/compare/v2.0.0...HEAD
+[unreleased]: https://github.com/astra1dev/MalumMenu-Android/compare/v2.1.0...HEAD
+[2.1.0]: https://github.com/astra1dev/MalumMenu-Android/compare/v2.0.0...v2.1.0
 [2.0.0]: https://github.com/astra1dev/MalumMenu-Android/compare/v1.0.1...v2.0.0
 [1.0.1]: https://github.com/astra1dev/MalumMenu-Android/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/astra1dev/MalumMenu-Android/releases/tag/v1.0.0
