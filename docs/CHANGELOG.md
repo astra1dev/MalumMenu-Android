@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 
 ### Changed
 
+- Bump @typescript-eslint/eslint-plugin from 8.63.0 to 8.70.1 by [@dependabot] ([#51])
 - Bump @typescript-eslint/parser from 8.63.0 to 8.70.1 by [@dependabot] ([#53])
 - Bump globals from 17.7.0 to 17.12.0 by [@dependabot] ([#54])
 
@@ -80,6 +81,7 @@ Initial release
 [#55]: https://github.com/astra1dev/MalumMenu-Android/pull/55
 [#54]: https://github.com/astra1dev/MalumMenu-Android/pull/54
 [#53]: https://github.com/astra1dev/MalumMenu-Android/pull/53
+[#51]: https://github.com/astra1dev/MalumMenu-Android/pull/51
 [#50]: https://github.com/astra1dev/MalumMenu-Android/pull/50
 [#45]: https://github.com/astra1dev/MalumMenu-Android/pull/45
 [#38]: https://github.com/astra1dev/MalumMenu-Android/pull/38
