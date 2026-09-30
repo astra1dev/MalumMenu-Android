@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 
 ## [Unreleased]
 
+### Changed
+
+- Bump @typescript-eslint/parser from 8.63.0 to 8.70.1 by [@dependabot] ([#53])
+- Bump globals from 17.7.0 to 17.12.0 by [@dependabot] ([#54])
+
 ## [2.1.0] - 2026-09-28
 
 The released APK comes with game version `18.0.0` (`2026.8.18`).
@@ -26,7 +31,6 @@ The released APK comes with game version `18.0.0` (`2026.8.18`).
 
 ### Fixed
 
-- The menu no longer opens after dragging the icon
 - Make custom speed affect ghost speed too
 - Properly check for Il2Cpp objects being null
 - Ensure Complete My Tasks completes all tasks
@@ -74,6 +78,8 @@ Initial release
 [@dependabot]: https://github.com/dependabot
 
 [#55]: https://github.com/astra1dev/MalumMenu-Android/pull/55
+[#54]: https://github.com/astra1dev/MalumMenu-Android/pull/54
+[#53]: https://github.com/astra1dev/MalumMenu-Android/pull/53
 [#50]: https://github.com/astra1dev/MalumMenu-Android/pull/50
 [#45]: https://github.com/astra1dev/MalumMenu-Android/pull/45
 [#38]: https://github.com/astra1dev/MalumMenu-Android/pull/38
