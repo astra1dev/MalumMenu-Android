@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 
 ## [Unreleased]
 
+## [2.1.1] - 2026-10-01
+
+The released APK comes with game version `19.0.0` (`2026.9.29`).
+
 ### Changed
 
 - Bump eslint from 10.7.0 to 10.11.0 by [@dependabot] ([#49])
@@ -74,6 +78,8 @@ The released APK comes with game version `17.4.0` (`2026.6.5`).
 
 ## [1.0.0] - 2026-07-08
 
+The released APK comes with game version `17.4.0` (`2026.6.5`).
+
 Initial release
 
 [@repinek]: https://github.com/repinek
@@ -93,7 +99,8 @@ Initial release
 [#7]: https://github.com/astra1dev/MalumMenu-Android/pull/7
 [#6]: https://github.com/astra1dev/MalumMenu-Android/pull/6
 
-[unreleased]: https://github.com/astra1dev/MalumMenu-Android/compare/v2.1.0...HEAD
+[unreleased]: https://github.com/astra1dev/MalumMenu-Android/compare/v2.1.1...HEAD
+[2.1.1]: https://github.com/astra1dev/MalumMenu-Android/compare/v2.1.0...v2.1.1
 [2.1.0]: https://github.com/astra1dev/MalumMenu-Android/compare/v2.0.0...v2.1.0
 [2.0.0]: https://github.com/astra1dev/MalumMenu-Android/compare/v1.0.1...v2.0.0
 [1.0.1]: https://github.com/astra1dev/MalumMenu-Android/compare/v1.0.0...v1.0.1
