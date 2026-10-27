@@ -29,8 +29,12 @@
 
             "complete_my_tasks": "Complete My Tasks",
 
+            "reveal_roles": "Rollen anzeigen",
+
             "call_meeting": "Call Meeting",
             "sabotage_reactor": "Sabotiere Reaktor",
+            "sabotage_all": "Alles sabotieren",
+            "close_all_doors": "Alle Türen schließen",
             "open_sabotage_map": "Öffne Sabotage-Karte",
             "unlock_vents": "Benutze Vents",
             "kick_vents": "Kicke alle aus Vents",

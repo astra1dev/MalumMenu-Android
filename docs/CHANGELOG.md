@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 
 ## [Unreleased]
 
+### Added
+
+- Sabotage All: triggers every sabotage the current map supports and closes all doors
+- Close All Doors
+- Reveal Roles: shows each player's role and team color above their name and on the meeting screen
+
 ## [2.1.1] - 2026-10-01
 
 The released APK comes with game version `19.0.0` (`2026.9.29`).
