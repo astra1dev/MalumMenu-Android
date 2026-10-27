@@ -7,6 +7,7 @@ export class UnityUtils {
     private static Resources: Il2Cpp.Class;
     private static Vector3: Il2Cpp.Class;
     private static Vector2: Il2Cpp.Class;
+    private static Color: Il2Cpp.Class;
 
     private static Object: Il2Cpp.Class;
 
@@ -26,6 +27,7 @@ export class UnityUtils {
         this.Resources = AssemblyHelper.CoreModule.class("UnityEngine.Resources");
         this.Vector3 = AssemblyHelper.CoreModule.class("UnityEngine.Vector3");
         this.Vector2 = AssemblyHelper.CoreModule.class("UnityEngine.Vector2");
+        this.Color = AssemblyHelper.CoreModule.class("UnityEngine.Color");
 
         this.Object = AssemblyHelper.CoreModule.class("UnityEngine.Object");
 
@@ -194,5 +196,36 @@ export class UnityUtils {
      */
     static cachedPtr(object: Il2Cpp.Object): Il2Cpp.Pointer {
         return object.field<Il2Cpp.Pointer>("m_CachedPtr").value;
+    }
+
+    /**
+     * Reads the numeric value of an enum member by its name
+     *
+     * Resolving by name keeps us working when the game inserts new members and shifts the numbers
+     *
+     * @returns the value, or `undefined` if the enum has no such member
+     */
+    static enumValue(enumClass: Il2Cpp.Class, name: string): number | undefined {
+        const field = enumClass.tryField(name);
+        if (!field) return undefined;
+        return Number(field.value);
+    }
+
+    /** Reverse of {@link enumValue}: finds the member name for a numeric value */
+    static enumName(enumClass: Il2Cpp.Class, value: number): string | undefined {
+        for (const field of enumClass.fields) {
+            if (!field.isStatic) continue;
+            try {
+                if (Number(field.value) === value) return field.name;
+            } catch {
+                // special fields like value__ can't be read
+            }
+        }
+        return undefined;
+    }
+
+    /** Wrapper over UnityEngine::Color::.ctor */
+    static createColor(r: number, g: number, b: number, a: number = 1): Il2Cpp.ValueType {
+        return this.createInstance(this.Color, r, g, b, a).unbox();
     }
 }

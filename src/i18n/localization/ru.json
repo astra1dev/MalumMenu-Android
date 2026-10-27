@@ -29,8 +29,12 @@
 
             "complete_my_tasks": "Выполнить мои задания",
 
+            "reveal_roles": "Показать роли",
+
             "call_meeting": "Созвать экстренное собрание",
             "sabotage_reactor": "Саботировать реактор",
+            "sabotage_all": "Саботировать всё",
+            "close_all_doors": "Закрыть все двери",
             "open_sabotage_map": "Открыть карту саботажа",
             "unlock_vents": "Разблокировать венты",
             "kick_vents": "Выгнать всех из вентов",

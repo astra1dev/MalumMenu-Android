@@ -39,11 +39,14 @@
 ### Roles
 
 - Complete My Tasks
+- Reveal Roles
 
 ### Ship
 
 - Call Meeting
 - Sabotage Reactor
+- Sabotage All (reactor, oxygen, lights, comms, doors)
+- Close All Doors
 - Open Sabotage Map
 - Unlock Vents
 - Kick all from Vents

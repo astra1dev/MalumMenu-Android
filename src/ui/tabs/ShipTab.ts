@@ -28,6 +28,20 @@ export class ShipTab {
 
         add(
             layout.button(
+                I18n.t("menu.functions.sabotage_all"),
+                UnityUtils.run(() => ModuleManager.get(ShipModule)?.sabotageAll())
+            )
+        );
+
+        add(
+            layout.button(
+                I18n.t("menu.functions.close_all_doors"),
+                UnityUtils.run(() => ModuleManager.get(ShipModule)?.closeAllDoors())
+            )
+        );
+
+        add(
+            layout.button(
                 I18n.t("menu.functions.open_sabotage_map"),
                 UnityUtils.run(() => ModuleManager.get(ShipModule)?.openSabotageMap())
             )
